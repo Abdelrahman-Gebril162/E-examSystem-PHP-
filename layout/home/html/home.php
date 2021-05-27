@@ -21,6 +21,7 @@
                     <li><a href="\ChatApp">ChatApp</a></li>
                     <li> <a href="#about">About us</a></li>
                     <li><a href="#contact">Contact us </a></li>
+                    <li><a href="#contact">Exams </a></li>
                     
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
