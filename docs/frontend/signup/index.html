@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div style="height: 100%; width: 100%; display: flex; align-items: center;">
+    <div style="position: absolute; top: 20px; right: 50px; height: 140px; width: 140px">
+        <img style="height: 100%; width: 100%;" src="University-Logo.svg" />
+    </div>
+    <div style="position: absolute; top: 47%; right: 20px; transform: translateY(-50%);height: 600px; width: 600px;">
+        <img style="height: 100%; width: 100%" src="Background-Illustrator.svg" />
+    </div>
+
+    <div style="height: 100%; width: 394px; background-color: #FFBE55;"></div>
+    <div class="form-container">
+        <div>
+            <p style="font: normal normal normal 28px/28px Arial; color: #F2F5FA; text-align: center; margin-bottom: 40px;">Sign In</p>
+            <div class="input-container">
+                <input type="text" required=""/>
+                <label>Name</label>		
+            </div>
+            <div class="input-container">
+                <input type="text" required=""/>
+                <label>Email</label>		
+            </div>
+            <div style="padding: 0 40px; display: flex; justify-content: space-between; margin-bottom: 30px">
+                <label class="pure-material-checkbox">
+                    <input type="checkbox">
+                    <span>Student</span>
+                  </label>
+                  <label class="pure-material-checkbox">
+                    <input type="checkbox">
+                    <span>Professor</span>
+                  </label>
+            </div>
+
+              <Button class="signin-button">
+                  Sign In
+              </Button>
+              <p class="notification-message">Your password will be sent soon , See your email address</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
