@@ -14,7 +14,7 @@
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" style="width:300px " type="search" placeholder="Search" aria-label="Search">
             </form>
-
+            hello
             <div class="nav-links">
                 <ul>
                     <li><a href="\Faculty">Faculties</a></li>
