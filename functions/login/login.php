@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include ("../mainFunctions/conn.php");
+
 extract($_POST);
 
 $selAcc = $conn->query("SELECT * FROM user_account WHERE email='$email' AND password='$pass' ");
