@@ -41,6 +41,8 @@
                                 <a class="dropdown-item" href="#">Courses</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Enrolement</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Exam</a>
                             </div>
                         </li>
                     

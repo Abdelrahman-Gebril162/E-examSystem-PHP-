@@ -1,4 +1,4 @@
-// Admin Log in
+//#region Login for all users
 $(document).on("submit","#loginForm", function(){
    $.post("../../../functions/login/login.php", $(this).serialize(), function(data){
       if(data.res == "invalid")
@@ -15,168 +15,94 @@ $(document).on("submit","#loginForm", function(){
         window.location.href = "../../../index.php";
       }
    },'json');
-
    return false;
 });
+//#endregion
 
-// Submit Answer
-$(document).on('submit', '#submitAnswerFrm', function(){
-  var examAction = $('#examAction').val();
-
-  if(examAction != "")
-  {
-    Swal.fire({
-    title: 'Time Out',
-    text: "your time is over, please click ok",
-    icon: 'warning',
-    showCancelButton: false,
-    allowOutsideClick: false,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'OK!'
-}).then((result) => {
-if (result.value) {
-
-   $.post("query/submitAnswerExe.php", $(this).serialize(), function(data){
-
-    if(data.res == "alreadyTaken")
-    {
-       Swal.fire(
-         'Already Taken',
-         "you already take this exam",
-         'error'
-       ) 
-    }
-    else if(data.res == "success")
-    {
-        Swal.fire({
-            title: 'Success',
-            text: "your answer successfully submitted!",
-            icon: 'success',
-            allowOutsideClick: false,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK!'
-        }).then((result) => {
-        if (result.value) {
-          $('#submitAnswerFrm')[0].reset();
-           var exam_id = $('#exam_id').val();
-           window.location.href='home.php?page=result&id=' + exam_id;
+//#region create student account
+$(document).on("submit","#createStudent" , function(){
+    $.post("../../../functions/student/create.php", $(this).serialize() , function(data){
+        if(data.res == "exist")
+        {
+            Swal.fire(
+                'Already Exist',
+                'check National id or phone Number',
+                'error'
+            )
         }
-
-        });
-
-
-    }
-    else if(data.res == "failed")
-    {
-     Swal.fire(
-         'Error',
-         "Something;s went wrong",
-         'error'
-       ) 
-    }
-
-   },'json');
-
-}
-});
-  }
-  else
-  {
-      Swal.fire({
-    title: 'Are you sure?',
-    text: "you want to submit your answer now?",
-    icon: 'warning',
-    showCancelButton: true,
-    allowOutsideClick: false,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, submit now!'
-}).then((result) => {
-if (result.value) {
-
-   $.post("query/submitAnswerExe.php", $(this).serialize(), function(data){
-
-    if(data.res == "alreadyTaken")
-    {
-       Swal.fire(
-         'Already Taken',
-         "you already take this exam",
-         'error'
-       ) 
-    }
-    else if(data.res == "success")
-    {
-        Swal.fire({
-            title: 'Success',
-            text: "your answer successfully submitted!",
-            icon: 'success',
-            allowOutsideClick: false,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK!'
-        }).then((result) => {
-        if (result.value) {
-          $('#submitAnswerFrm')[0].reset();
-           var exam_id = $('#exam_id').val();
-           window.location.href='home.php?page=result&id=' + exam_id;
+        else if(data.res == "success")
+        {
+            Swal.fire(
+                'Success',
+                ' Successfully Added',
+                'success'
+            )
+            location.reload();
+              setTimeout(function(){ 
+                  $('#body').load(document.URL);
+               }, 2000);
         }
+    },'json')
+    return false;
+  });
+//#endregion
 
+//#region faculty list of specific faculty
+$(document).ready(function(){
+    $.ajax({
+        url: '../../../functions/mainFunctions/getFacultyList.php',
+        type: 'get',
+        dataType: 'JSON',
+        success: function(response){
+            var len = response.length;
+            for(let i=0; i<len; i++){
+                let id = response[i].id;
+                let name = response[i].name;
+                let option = "<option value='"+id+"'>"+name+"</optoin>";
+                $(".faculty").append(option);
+            }
+            
+        }
+    });
+});
+//#endregion
+
+//#region department list of specific faculty
+$(document).ready(function(){
+    let level=0;
+    $(".faculty").change(function(){
+        $.ajax({
+            url: '../../../functions/mainFunctions/getDepartmentList.php',
+            data: {id: $(".faculty").val()},
+            type: 'get',
+            dataType: 'JSON',
+            success: function(response){
+                $(".department").empty();
+                $(".facultyLevels").append("<option value='' disabled selected hidden>Choose a Department</option>");
+                var len = response.length;
+                for(let i=0; i<len; i++){
+                    let id = response[i].id;
+                    let name = response[i].name;
+                    level = response[i].level;
+                    let option = "<option value='"+id+"'>"+name+"</optoin>";
+                    $(".department").append(option);
+                }
+            },
+            complete: function(){
+                $(".facultyLevels").empty();
+                $(".facultyLevels").append("<option value='' disabled selected hidden>Choose a Level</option>");
+                for(let i=1; i<=level; i++){
+                    let option = "<option value='"+i+"'>"+'LEVEL '+i+"</optoin>";
+                    $(".facultyLevels").append(option);
+                }
+            }
         });
-
-
-    }
-    else if(data.res == "failed")
-    {
-     Swal.fire(
-         'Error',
-         "Something;s went wrong",
-         'error'
-       ) 
-    }
-
-   },'json');
-
-}
+    })
+    
 });
-  }
+//#endregion
 
-
-
-
-
-
-
-
-return false;
-});
-
-
-// Submit Feedbacks
-$(document).on("submit","#addFeebacks", function(){
-   $.post("query/submitFeedbacksExe.php", $(this).serialize(), function(data){
-      if(data.res == "limit")
-      {
-        Swal.fire(
-          'Error',
-          'You reached the 3 limit maximum for feedbacks',
-          'error'
-        )
-      }
-      else if(data.res == "success")
-      {
-        Swal.fire(
-          'Success',
-          'your feedbacks has been submitted successfully',
-          'success'
-        )
-          $('#addFeebacks')[0].reset();
-        
-      }
-   },'json');
-
-   return false;
-});
-
+//#region logout from websit 
 $(".logout").click(function(){
     Swal.fire({
         title: 'Are you sure?',
@@ -193,3 +119,4 @@ $(".logout").click(function(){
         }
       })
 });
+//#endregion
