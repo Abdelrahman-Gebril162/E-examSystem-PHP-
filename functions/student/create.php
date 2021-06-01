@@ -1,6 +1,7 @@
   <?php 
  include("../../functions/mainFunctions/conn.php");
  extract($_POST);
+ extract($_FILES);
 $selStudent = $conn->query("SELECT * FROM student WHERE N_id='$Nid' ");
 $selStudentMobile = $conn->query("SELECT * FROM student WHERE mobileN='$phoneNumber' ");
 $selstudentAccount = $conn->query("SELECT email FROM user_account WHERE email='$Email' ");
@@ -9,11 +10,28 @@ $selstudentAccount = $conn->query("SELECT email FROM user_account WHERE email='$
 	$res = array("res" => "exist");
  }
  else
- {
-	$insStudent = $conn->query("INSERT INTO student(`id`, `N_id`, `fname`, `lname`, `gender`,
+ {  
+    $checkImage = $_FILES['upImage']['name']==Null?"../../../upload/defaultImages/male-student-icon-png_251938.jpg":"C:\\xampp\htdocs\E-examSystem\upload\studentImages\\".$_FILES['upImage']['name'];
+	$realImage="";
+    if($checkImage=="../../../upload/defaultImages/male-student-icon-png_251938.jpg")
+    {
+        $rndImageName= rand();
+        copy("C:\\xampp\\htdocs\E-examSystem\\upload\\defaultImages\\male-student-icon-png_251938.jpg","C:\\xampp\\htdocs\E-examSystem\\upload\\studentImages\\".$rndImageName.".jpg");
+        $checkImage= "C:\\xampp\htdocs\E-examSystem\upload\studentImages\\".$rndImageName.".jpg";
+        $imagtmp = $_FILES['upImage']['tmp_name'];
+        $realImage= "../../../upload/studentImages/".$rndImageName.".jpg";
+        move_uploaded_file($imagtmp,$checkImage);
+    }
+    else{
+        $imagtmp = $_FILES['upImage']['tmp_name'];
+        $realImage= "../../../upload/studentImages/".$_FILES['upImage']['name'];
+        move_uploaded_file($imagtmp,$checkImage);
+    }
+    
+    $insStudent = $conn->query("INSERT INTO student(`id`, `N_id`, `fname`, `lname`, `gender`,
      `birthdate`, `mobileN`, `country`, `city`, `picture`, `level`, `faculty_id`, `account_id`, `dept_id`)
      VALUES
-     (NUll,'$Nid','$firstname','$lastname','$gender','$Birthday','$phoneNumber','$country','$city',NUll,'$facultyLevels','$faculty',Null,'$department') ");
+     (NUll,'$Nid','$firstname','$lastname','$gender','$Birthday','$phoneNumber','$country','$city','$realImage','$facultyLevels','$faculty',Null,'$department') ");
 	if($insStudent)
 	{
         $last_student = $conn->lastInsertId();
@@ -27,7 +45,8 @@ $selstudentAccount = $conn->query("SELECT email FROM user_account WHERE email='$
              if($updateStudent)
              {
                  $insertStudentRole= $conn->query("INSERT INTO `user_role` (`id`, `user_id`, `role_id`) VALUES (NULL, '$account_id', '2')");
-                 $res = array("res" => "success");
+                 $res = array(
+                     "res" => "success");
             }
          }
 	}

@@ -30,7 +30,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Roles</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Student</a>
+                                <a class="dropdown-item" href="/E-examSystem/layout/student/html/">Student</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Staff</a>
                                 <div class="dropdown-divider"></div>

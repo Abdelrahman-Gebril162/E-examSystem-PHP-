@@ -1,17 +1,36 @@
-<form method="POST" id="createStudent">
+
+<?php
+include "../../../functions/mainFunctions/conn.php";
+include "../../../layout/student/html/header.php";
+?>
+<ul class="nav justify-content-center" style="background-color:white;">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.php">HOME</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Disabled</a>
+  </li>
+</ul>
+<form method="POST" id="createStudent" enctype="multipart/form-data">
 <div class="container">
     <div class="row">
         <div class="col-lg-3 " style="text-align: center;"></div>
         <div class="col-lg-6 " style="text-align: center;"> 
             
             <label for="file-input">
-                <img id="image_preview" src="../../../upload/defaultImages/male-student-icon-png_251938.jpg"style="cursor: pointer; width: 25vw; height: 35vh; border-radius: 50%;"/>
+            <img id="image_preview" src="../../../upload/defaultImages/male-student-icon-png_251938.jpg"style="cursor: pointer; width: 25vw; height: 35vh; border-radius: 50%;"/><br>
+              <input type="file" id="upload" onchange="readfile(this)" name="upImage" style="position:relative;right:-98px;margin-top:10px;"/>
             </label>
-            <input id="file-input" name="upload" onchange="readfile(this)" type="file" style="display: none"/>
         </div>
         </div>
         <div class="col-lg-3 " style="text-align: center;"></div>
-    </div></div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-3 " style="text-align: center;"></div>
@@ -32,7 +51,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 " style="text-align: center;"></div>
-                <div class="col-lg-6 " style="text-align: center;">  <input type="date" id="Birthday" name="Birthday" placeholder="Birthday" required>
+                <div class="col-lg-6 " style="text-align: center;">  <input type="date" id="Birthday" name="Birthday"  placeholder="Birthday" required>
                 </div>
                 <div class="col-lg-3 " style="text-align: center;"></div>
             </div></div>
@@ -129,7 +148,7 @@
                         <div class="col-lg-3 " style="text-align: center;"></div>
                     </div></div>
 </form>
-
+<?php include "../../../layout/student/html/footer.php"; ?>
 <script>
 function readfile(input) {
     if (input.files && input.files[0]) {

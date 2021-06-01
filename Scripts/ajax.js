@@ -19,35 +19,154 @@ $(document).on("submit","#loginForm", function(){
 });
 //#endregion
 
-//#region create student account
-$(document).on("submit","#createStudent" , function(){
-    $.post("../../../functions/student/create.php", $(this).serialize() , function(data){
-        if(data.res == "exist")
-        {
-            Swal.fire(
-                'Already Exist',
-                'check National id or phone Number',
-                'error'
-            )
-        }
-        else if(data.res == "success")
-        {
+//#region student ajax call
+    //#region create student account
+$("form#createStudent").submit(function(e) {
+    e.preventDefault();    
+    var formData = new FormData(this);
+
+    $.ajax({
+        url: "../../../functions/student/create.php",
+        type: 'POST',
+        data: formData,
+        success: callback,
+        cache: false,
+        contentType: false,
+        processData: false,
+    });
+});
+function callback() {
             Swal.fire(
                 'Success',
-                ' Successfully Added',
+                'Successfully Added ',
                 'success'
-            )
-            location.reload();
-              setTimeout(function(){ 
-                  $('#body').load(document.URL);
-               }, 2000);
+            ).then((result) => {
+                if (result) {
+                   window.location.href="../../../layout/student/html/";
+                }
+              })
+}
+//#endregion
+
+//#region delete student account
+$(document).on("click", ".delete", function(e){
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You Want To Delete this student!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.value) {
+            e.preventDefault();
+            $.ajax({
+             type : "post",
+             url : "../../../functions/student/delete.php",
+             dataType : "json",  
+             data : {id:$('#sid').val(),picture:$('#sp').val()},
+             cache : false,
+             success : function(data){
+               if(data.res == "success")
+               {
+                 Swal.fire(
+                   'Success',
+                   'Selected student successfully deleted',
+                   'success'
+                 )
+                 location.reload();
+               }
+             },
+             error : function(xhr, ErrorStatus, error){
+               console.log(status.error);
+             }
+           });
         }
-    },'json')
+      })
     return false;
   });
 //#endregion
 
-//#region faculty list of specific faculty
+//#region update student account
+$(document).on("click", ".edit", function(e){
+    Swal.fire({
+        title: 'Are you sure?',
+        html: ` <input type='text' id='fname' name='fname' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='first Name '/>
+                <input type='text' id='lname' name='lname' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='last Name '/>
+                <input type='text' id='city' name='city' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='City '/>
+                <input type='password' id='pass' name='password' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='password '/>`,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.value) {
+            e.preventDefault();
+            $.ajax({
+             type : "post",
+             url : "../../../functions/student/update.php",
+             dataType : "json",  
+             data : {id:$('#sid').val(),fname:$('#fname').val(),lname:$('#lname').val(),city:$('#lname').val(),password:$('#pass').val(),},
+             cache : false,
+             success : function(data){
+               if(data.res == "success")
+               {
+                 Swal.fire(
+                   'Success',
+                   'Selected student successfully updated',
+                   'success'
+                 )
+                 location.reload();
+               }
+             },
+             error : function(xhr, ErrorStatus, error){
+               console.log(status.error);
+             }
+           });
+        }
+      })
+    return false;
+  });
+//#endregion
+
+//#region selectSingle student account
+$(document).on("click", ".view", function(e){
+            e.preventDefault();
+            $.ajax({
+            type : "post",
+            url : "../../../functions/student/selectSingle.php",
+            dataType : "json",  
+            data : {id:$('#sid').val()},
+            cache : false,
+            success : function(data){
+                Swal.fire({
+                    html: `<img src='`+data[0].picture+`' style="width:200px;height:200px;border-radius:50%">
+                        <h4>`+ "firsName: "+data[0].fname+`</h4><br>
+                        <h4>`+ "LastName: "+data[0].lname+`</h4><br>
+                        <h4>`+ "City:  "+data[0].city+`</h4><br>
+                        <h4>`+ "Faculty:  "+data[0].ffname+`</h4><br>
+                        <h4>`+ "Department:  "+data[0].ddname+`</h4><br>` ,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                  });
+            
+            },
+            error : function(xhr, ErrorStatus, error){
+            console.log(status.error);
+            }
+        });
+    return false;})
+//#endregion
+
+//#endregion
+
+//#region mainFunctions ajax call
+
+//#region faculty list
 $(document).ready(function(){
     $.ajax({
         url: '../../../functions/mainFunctions/getFacultyList.php',
@@ -101,6 +220,8 @@ $(document).ready(function(){
     
 });
 //#endregion
+
+//#endregion mainFuncions
 
 //#region logout from websit 
 $(".logout").click(function(){
