@@ -3,9 +3,11 @@
  extract($_POST);
  extract($_FILES);
 $selStudent = $conn->query("SELECT * FROM student WHERE N_id='$Nid' ");
+$selProfessor = $conn->query("SELECT * FROM professor WHERE N_id='$Nid' ");
 $selStudentMobile = $conn->query("SELECT * FROM student WHERE mobileN='$phoneNumber' ");
+$selProfessorMobile = $conn->query("SELECT * FROM professor WHERE mobileN='$phoneNumber' ");
 $selstudentAccount = $conn->query("SELECT email FROM user_account WHERE email='$Email' ");
- if($selStudent->rowCount() > 0 || $selStudentMobile->rowCount() > 0 || $selstudentAccount->rowCount() > 0)
+ if($selStudent->rowCount() > 0  || $selProfessor->rowCount() > 0|| $selStudentMobile->rowCount() > 0| | $selProfessorMobile->rowCount() > 0 || $selstudentAccount->rowCount() > 0)
  {
 	$res = array("res" => "exist");
  }

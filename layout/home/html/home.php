@@ -8,7 +8,7 @@
     <div class="header">
         <div class="navbar">
             <div>
-                <a href="/home"><img src="layout/home/images/logo.png" style="width: 100px" class="img-responsive" alt=""></a>
+                <a href="index.php"><img src="layout/home/images/logo.png" style="width: 100px" class="img-responsive" alt=""></a>
             </div>
 
             <form class="form-inline my-2 my-lg-0">
@@ -32,7 +32,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/E-examSystem/layout/student/html/">Student</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Staff</a>
+                                <a class="dropdown-item" href="/E-examSystem/layout/professor/html/">Professor</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Faculties</a>
                                 <div class="dropdown-divider"></div>

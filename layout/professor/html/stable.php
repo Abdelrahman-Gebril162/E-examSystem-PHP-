@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../../../layout/student/css/stable.css">
+<link rel="stylesheet" href="../../../layout/professor/css/stable.css">
 
 <ul class="nav justify-content-center" style="background-color:white;">
   <li class="nav-item">
@@ -21,11 +21,11 @@
             <div class="row" style="margin:0;padding:0">
                     <div class="col-sm-8"></div>
                     <div class="col-sm-4">
-                    <a href="../../../layout/student/html/create.php" id='add' class="btn btn-success" style="float:right;"><i class="fas fa-plus"></i> ADD</a>
+                    <a href="../../../layout/professor/html/create.php" id='add' class="btn btn-success" style="float:right;"><i class="fas fa-plus"></i> ADD</a>
                     </div>
                 </div>
                 <div class="row" style="margin:0;padding:0">
-                    <div class="col-sm-8"><h1>Student <b>Details</b></h1></div>
+                    <div class="col-sm-8"><h1>Professor <b>Details</b></h1></div>
                     <div class="col-sm-4">
                         <div class="search-box">
                             <i class="material-icons">&#xE8B6;</i>
@@ -57,13 +57,13 @@
                         <td><?php echo$row['ddname'];?></td>
                         <td><?php echo $row['city'];?></td>
                         <td><!--url  ../../../functions -->
-                            <a href="#/id=<?php echo $row['id'];?>" class="view" title="View" data-toggle="tooltip"><i class="fas fa-eye"></i></a>
-                            <a href="#/id=<?php echo $row['id']; ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                            <a href="#/id=<?php echo $row['id']; ?>" class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+                            <a href="#/id=<?php echo $row['id'];?>" style="color:#03A9F4" class="viewP" title="View" data-toggle="tooltip"><i class="fas fa-eye"></i></a>
+                            <a href="#/id=<?php echo $row['id']; ?>" style="color:#FFC107" class="editP" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                            <a href="#/id=<?php echo $row['id']; ?>" style="color:#E34724" class="deleteP" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
                         </td>
                         </tr>
-                        <input type="hidden" name="id" id="sid" value="<?php echo $row['id'];?>">
-                        <input type="hidden" name="picture" id="sp" value="<?php echo $row['picture'];?>">
+                        <input type="hidden" name="id" id="idP" value="<?php echo $row['id'];?>">
+                        <input type="hidden" name="picture" id="pP" value="<?php echo $row['picture'];?>">
                         <?php } ?>
                 <?php
                 }

@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../contents/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="../../../contents/css/all.min.css">
-    <link rel="stylesheet" href="../../../layout/student/css/style.css">
+    <link rel="stylesheet" href="../../../layout/professor/css/style.css">
 </head>
 <body>
     

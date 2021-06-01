@@ -1,0 +1,84 @@
+body {
+    text-align: left;
+  
+    font: normal normal normal 45px Urdu Typesetting;
+    letter-spacing: 2.74px;
+    color: #084C94;
+    opacity: 1;
+}
+.btn-primary{
+   margin-top: 40px;
+    background: #34425E 0% 0% no-repeat padding-box;
+    border-radius: 47px;
+    opacity: 1;
+    width: 200px;
+height: 50px;
+color: antiquewhite;
+font-family: normal normal bold  Segoe UI;
+font-size: 20px;
+font-weight: bolder;
+letter-spacing: 1.2px;
+color: #FFFFFF;
+}
+
+.btn-primary:hover{
+    background-color: #f59f37;;
+    color:#34425E ;
+}
+#mymsg{
+    padding-top: 30px;
+    position: fixed;
+    top: 250px;
+    width: 50%;
+    display: none;
+    height: 300px;
+    margin-left: 25%;
+    font: normal normal normal 66px/1226px Arial;
+    letter-spacing: 1.85px;
+    color: #FFFFFF;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    background: #34425E 0% 0% ;
+    border: 1px solid #707070;
+    
+    border-radius: 93px;
+    opacity: 0.88;
+    font-size: 20px;
+   }
+
+
+.form-control{
+    width: 70%;
+    margin-left:15% ;
+    background-color: #34425E ;
+
+
+}
+#mymsg input{
+    padding-bottom: 1em;
+    height: 40px;
+    background-color: #34425E ;
+    outline: 0;
+    padding-top: 1em;
+    border-width: 0 0 1px ;
+    border-color: #FFFFFF;
+    border-radius: 0%;
+    margin-top: 5em;
+color: rgb(255, 255, 255);
+    text-align: left;
+font: normal normal normal 15px/16px Arial;
+}
+.btn-light{
+    width: 7em;
+    margin-top: 1em;
+    align-self: center;
+    margin-left: 42%;
+    margin-top: 2em;
+    font-family: normal normal bold  Segoe UI;
+    font-size: 20px;
+    
+
+
+}

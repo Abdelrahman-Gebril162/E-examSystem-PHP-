@@ -48,7 +48,7 @@ function callback() {
 }
 //#endregion
 
-//#region delete student account
+    //#region delete student account
 $(document).on("click", ".delete", function(e){
     Swal.fire({
         title: 'Are you sure?',
@@ -88,7 +88,7 @@ $(document).on("click", ".delete", function(e){
   });
 //#endregion
 
-//#region update student account
+    //#region update student account
 $(document).on("click", ".edit", function(e){
     Swal.fire({
         title: 'Are you sure?',
@@ -131,7 +131,7 @@ $(document).on("click", ".edit", function(e){
   });
 //#endregion
 
-//#region selectSingle student account
+    //#region selectSingle student account
 $(document).on("click", ".view", function(e){
             e.preventDefault();
             $.ajax({
@@ -241,3 +241,191 @@ $(".logout").click(function(){
       })
 });
 //#endregion
+
+//#region getAccount ajac call
+var role="";
+$('button').click(function(s){
+    role = s.target.value;
+});
+$(document).on('click', '#subm', function(e){
+    e.preventDefault();
+    $.ajax({
+    type : "post",
+    url : "../../../functions/mainFunctions/getAccount.php",
+    dataType : "json",  
+    data : {Nid:$('#Nid').val(),rolep:role,roleS:role},
+    cache : false,
+    success : function(data){
+        if(data[0] !=null)
+        {
+            Swal.fire({
+                html: `<img src='`+data[0].picture+`' style="width:200px;height:200px;border-radius:50%">
+                    <h4>`+ "Your Email: "+data[0].email+`</h4><br>
+                    <h4>`+ "Your Password: "+data[0].password+`</h4>`,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              });
+        }
+        else
+        {
+            Swal.fire(
+                'Not Found User',
+                'Please Ask Admin To Create Acccount For You',
+                'error'
+              );
+        }
+    },
+    error : function(xhr, ErrorStatus, error){
+    console.log(status.error);
+    }
+});
+return false;});
+//#endregion
+
+//#region professor Crud 
+    //#region Create prof
+    $("form#createProfessor").submit(function(e) {
+        e.preventDefault();    
+        var formData = new FormData(this);
+    
+        $.ajax({
+            url: "../../../functions/professor/create.php",
+            type: 'POST',
+            data: formData,
+            success: callback,
+            cache: false,
+            contentType: false,
+            processData: false,
+        });
+    });
+    function callback() {
+                Swal.fire(
+                    'Success',
+                    'Successfully Added ',
+                    'success'
+                ).then((result) => {
+                    if (result) {
+                       window.location.href="../../../layout/professor/html/";
+                    }
+                  })
+    }
+    //#endregion
+
+    //#region delete professor account
+$(document).on("click", ".deleteP", function(e){
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You Want To Delete this Professor!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+    }).then((result) => {
+        if (result.value) {
+            e.preventDefault();
+            $.ajax({
+            type : "post",
+            url : "../../../functions/professor/delete.php",
+            dataType : "json",  
+            data : {id:$('#idP').val(),picture:$('#pP').val()},
+            cache : false,
+            success : function(data){
+            if(data.res == "success")
+            {
+                Swal.fire(
+                'Success',
+                'Selected student successfully deleted',
+                'success'
+                );
+                location.reload();
+            }
+            },
+            error : function(xhr, ErrorStatus, error){
+            console.log(status.error);
+            }
+        });
+        }
+    })
+    return false;
+});
+    //#endregion
+
+    //#region update professor account
+$(document).on("click", ".editP", function(e){
+    Swal.fire({
+        title: 'Are you sure?',
+        html: ` <input type='text' id='fname' name='fname' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='first Name '/>
+                <input type='text' id='lname' name='lname' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='last Name '/>
+                <input type='text' id='city' name='city' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='City '/>
+                <input type='password' id='pass' name='password' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='password '/>`,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.value) {
+            e.preventDefault();
+            $.ajax({
+             type : "post",
+             url : "../../../functions/professor/update.php",
+             dataType : "json",  
+             data : {id:$('#idP').val(),fname:$('#fname').val(),lname:$('#lname').val(),city:$('#city').val(),password:$('#pass').val(),},
+             cache : false,
+             success : function(data){
+               if(data.res == "success")
+               {
+                 Swal.fire(
+                   'Success',
+                   'Selected student successfully updated',
+                   'success'
+                 )
+                 location.reload();
+               }
+             },
+             error : function(xhr, ErrorStatus, error){
+               console.log(status.error);
+             }
+           });
+        }
+      })
+    return false;
+  });
+//#endregion
+
+     //#region selectSingle professor account
+$(document).on("click", ".viewP", function(e){
+    e.preventDefault();
+    $.ajax({
+    type : "post",
+    url : "../../../functions/professor/selectSingle.php",
+    dataType : "json",  
+    data : {id:$('#idP').val()},
+    cache : false,
+    success : function(data){
+        Swal.fire({
+            html: `<img src='`+data[0].picture+`' style="width:200px;height:200px;border-radius:50%">
+                <h4>`+ "firsName: "+data[0].fname+`</h4><br>
+                <h4>`+ "LastName: "+data[0].lname+`</h4><br>
+                <h4>`+ "City:  "+data[0].city+`</h4><br>
+                <h4>`+ "Faculty:  "+data[0].ffname+`</h4><br>
+                <h4>`+ "Department:  "+data[0].ddname+`</h4><br>` ,
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          });
+    
+    },
+    error : function(xhr, ErrorStatus, error){
+    console.log(status.error);
+    }
+});
+return false;})
+//#endregion
+
+//#endregion
+
