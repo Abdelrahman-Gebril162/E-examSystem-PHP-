@@ -55,7 +55,7 @@
             <!-- Page content-->
             <div class="row">
                 <?php if($res != null) {?>
-                <? foreach($res as $row)
+                <?php foreach($res as $row)
                  { 
                 ?>  
                 <!-- Team member -->
@@ -65,8 +65,8 @@
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="<?php echo $res[0]["picture"];?>" alt="card image"></p>
-                                    <h4 class="card-title"><?php echo $res[0]["fname"]." ".$res[0]["lname"];?></h4>
+                                    <p><img class=" img-fluid" src="<?php echo $row["picture"];?>" alt="card image"></p>
+                                    <h4 class="card-title"><?php echo $row["fname"]." ".$row["lname"];?></h4>
                                     Hover 
                                     <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                     More Info
@@ -77,10 +77,10 @@
                             <div class="card">
                                 <div class="card-body text-center ">
                                     <h4 class="card-title">More Info</h4>
-                                    <p class="card-text">Your Faculty : <?php echo $res[0]["ffname"]?></p>
-                                    <p class="card-text">Your Department : <?php echo $res[0]["ddname"]?></p>
-                                    <p class="card-text">National Id  : <?php echo $res[0]["N_id"]?></p>
-                                    <p class="card-text">BirthDay : <?php echo $res[0]["birthdate"]?></p>
+                                    <p class="card-text">Your Faculty : <?php echo $row["ffname"]?></p>
+                                    <p class="card-text">Your Department : <?php echo $row["ddname"]?></p>
+                                    <p class="card-text">National Id  : <?php echo $row["N_id"]?></p>
+                                    <p class="card-text">BirthDay : <?php echo $row["birthdate"]?></p>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
             <?php
                 }
          ?>
-         <?}?>
+         <?php } ?>
          <?php if($res==null){echo "<h1 style='text-align:center;color:red;line-height:400px;transform: skewY(20deg);'> There is No Professor Created Yet.</h1>" ;}?>
             </div>
             </div>
