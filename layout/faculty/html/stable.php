@@ -1,4 +1,21 @@
-<link rel="stylesheet" href="../../../layout/professor/css/stable.css">
+<?php include "../../../functions/mainFunctions/conn.php";?>
+<?php include "../../../functions/faculty/select.php";?><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../contents/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="../../../contents/css/all.min.css">
+    <link rel="stylesheet" href="../../../layout/student/css/style.css">
+    <link rel="stylesheet" href="../../../layout/professor/css/stable.css">
+</head>
+<body>
+    
+
+    
 
 <ul class="nav justify-content-center" style="background-color:white;">
   <li class="nav-item">
@@ -21,11 +38,11 @@
             <div class="row" style="margin:0;padding:0">
                     <div class="col-sm-8"></div>
                     <div class="col-sm-4">
-                    <a href="../../../layout/professor/html/create.php" id='add' class="btn btn-success" style="float:right;"><i class="fas fa-plus"></i> ADD</a>
+                    <a href="../../../layout/faculty/html/create.php" id='add' class="btn btn-success" style="float:right;"><i class="fas fa-plus"></i> ADD</a>
                     </div>
                 </div>
                 <div class="row" style="margin:0;padding:0">
-                    <div class="col-sm-8"><h1>Professor <b>Details</b></h1></div>
+                    <div class="col-sm-8"><h1><b>Faculty</b> Details</h1></div>
                     <div class="col-sm-4">
                         <div class="search-box">
                             <i class="material-icons">&#xE8B6;</i>
@@ -37,29 +54,29 @@
             <table class="table table-striped table-hover table-bordered" id="myTable">
                 <thead>
                         <th>#</th>
-                        <th>Photo</th>
+                        <th>Logo</th>
                         <th>Name <i class="fa fa-sort"></i></th>
-                        <th>Faculty</th>
-                        <th>Department <i class="fa fa-sort"></i></th>
-                        <th>City</th>
+                        <th>Created At</th>
+                        <th>LevelsNum <i class="fa fa-sort"></i></th>
+                        <th>Specialized Year</th>
                         <th>Actions</th>
                 </thead>
                 <tbody>
                     <?php
                      foreach ($res as $row) {
                     ?>
-                    <?php if($row['fname'] != "master") {?> 
+                    <?php if($row['name'] != "university") {?> 
                         <tr>
                         <td><?php echo $row['id'];?></td>
-                        <td><img src="<?php echo $row['picture'];?>" style="width=40px;height:40px;"></td>
-                        <td><?php echo $row['fname']." ".$row['lname'];?></td>
-                        <td><?php echo $row['ffname'];?></td>
-                        <td><?php echo$row['ddname'];?></td>
-                        <td><?php echo $row['city'];?></td>
+                        <td><img src="<?php echo $row['logo'];?>" style="width=40px;height:40px;"></td>
+                        <td><?php echo $row['name'];?></td>
+                        <td><?php echo $row['createdAt'];?></td>
+                        <td><?php echo$row['levelsNum'];?></td>
+                        <td><?php echo $row['specialYear'];?></td>
                         <td><!--url  ../../../functions -->
-                            <a href="<?php echo $row['id'];?>" style="color:#03A9F4" class="viewP" title="View" data-toggle="tooltip"><i class="fas fa-eye"></i></a>
-                            <a href="<?php echo $row['id']; ?>" style="color:#FFC107" class="editP" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                            <a href="<?php echo $row['id']; ?>" picture="<?php echo $row['picture'];?>" style="color:#E34724" class="deleteP" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+                            <a href="<?php echo $row['id'];?>" style="color:#03A9F4" class="viewF" title="View" data-toggle="tooltip"><i class="fas fa-eye"></i></a>
+                            <a id="<?php echo $row['id'];?>" style="color:#FFC107" class="editF" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                            <a id="<?php echo $row['id'];?>" picture="<?php echo $row['logo'];?>" style="color:#E34724" class="deleteF" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
                         </tr>
                         <?php } ?>
                 <?php
@@ -82,3 +99,22 @@
         </div>
     </div>  
 </div> 
+<script src="../../../Scripts/jquery-3.6.0.min.js"></script>
+<script src="../../../Scripts/ajax.js"></script>
+<script src="../../../Scripts/bootstrap.min.js"></script>
+<script src="../../../Scripts/all.min.js"></script>
+<script src="../../../Scripts/sweetalert.js"></script>
+</script>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -121,9 +121,8 @@ include "../../../layout/student/html/header.php";
                     <div class="row">
                         <div class="col-lg-3 " style="text-align: center;"></div>
                         <div class="col-lg-6 " style="text-align: center;">  
-                             <select class="department" id="select" name="department" required>
-                                <option value="" disabled selected hidden>Choose a Department</option>
-                                
+                             <select class="department" id="select" name="department" >
+                                <option value="General" disabled selected hidden>Choose a Department</option>
                              </select>
                         </div>
                         <div class="col-lg-3 " style="text-align: center;"></div>
@@ -133,8 +132,8 @@ include "../../../layout/student/html/header.php";
                         <div class="row">
                             <div class="col-lg-3 " style="text-align: center;"></div>
                             <div class="col-lg-6 " style="text-align: center;">  
-                                <select id="select" class="facultyLevels" name="facultyLevels" required>
-                                    <option value="" disabled selected hidden>Choose a Level</option>
+                                <select id="select" class="facultyLevels" name="facultyLevels" >
+                                    <option value="1" disabled selected hidden>Choose a Level</option>
                                  </select>                                    </div>
                             <div class="col-lg-3 " style="text-align: center;"></div>
 

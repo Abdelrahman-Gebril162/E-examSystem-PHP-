@@ -7,7 +7,7 @@ $selProfessor = $conn->query("SELECT * FROM professor WHERE N_id='$Nid' ");
 $selStudentMobile = $conn->query("SELECT * FROM student WHERE mobileN='$phoneNumber' ");
 $selProfessorMobile = $conn->query("SELECT * FROM professor WHERE mobileN='$phoneNumber' ");
 $selstudentAccount = $conn->query("SELECT email FROM user_account WHERE email='$Email' ");
- if($selStudent->rowCount() > 0  || $selProfessor->rowCount() > 0|| $selStudentMobile->rowCount() > 0| | $selProfessorMobile->rowCount() > 0 || $selstudentAccount->rowCount() > 0)
+ if($selStudent->rowCount() > 0  || $selProfessor->rowCount() > 0|| $selStudentMobile->rowCount() > 0 || $selProfessorMobile->rowCount() > 0 || $selstudentAccount->rowCount() > 0)
  {
 	$res = array("res" => "exist");
  }
@@ -29,11 +29,21 @@ $selstudentAccount = $conn->query("SELECT email FROM user_account WHERE email='$
         $realImage= "../../../upload/studentImages/".$_FILES['upImage']['name'];
         move_uploaded_file($imagtmp,$checkImage);
     }
-    
+    $insStudent="";
+    if($department=='')
+    {
     $insStudent = $conn->query("INSERT INTO student(`id`, `N_id`, `fname`, `lname`, `gender`,
      `birthdate`, `mobileN`, `country`, `city`, `picture`, `level`, `faculty_id`, `account_id`, `dept_id`)
      VALUES
-     (NUll,'$Nid','$firstname','$lastname','$gender','$Birthday','$phoneNumber','$country','$city','$realImage','$facultyLevels','$faculty',Null,'$department') ");
+     (NUll,'$Nid','$firstname','$lastname','$gender','$Birthday','$phoneNumber','$country','$city','$realImage','$facultyLevels','$faculty',Null,NUll) ");
+    }
+     else{
+        $insStudent = $conn->query("INSERT INTO student(`id`, `N_id`, `fname`, `lname`, `gender`,
+        `birthdate`, `mobileN`, `country`, `city`, `picture`, `level`, `faculty_id`, `account_id`, `dept_id`)
+        VALUES
+        (NUll,'$Nid','$firstname','$lastname','$gender','$Birthday','$phoneNumber','$country','$city','$realImage','$facultyLevels','$faculty',Null,'$department') ");
+     }   
+    
 	if($insStudent)
 	{
         $last_student = $conn->lastInsertId();

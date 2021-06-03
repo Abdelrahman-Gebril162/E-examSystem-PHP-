@@ -17,7 +17,7 @@
 
             <div class="nav-links">
                 <ul>
-                    <li><a href="\Faculty">Faculties</a></li>
+                    <li><a href="/E-examSystem/layout/faculty/html/index.php">Faculties</a></li>
                     <li><a href="\ChatApp">ChatApp</a></li>
                     <li> <a href="#about">About us</a></li>
                     <li><a href="#contact">Contact us </a></li>
@@ -34,7 +34,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/E-examSystem/layout/professor/html/">Professor</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Faculties</a>
+                                <a class="dropdown-item" href="/E-examSystem/layout/faculty/html/stable.php">Faculties</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Departments</a>
                                 <div class="dropdown-divider"></div>

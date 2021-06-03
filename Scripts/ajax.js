@@ -29,22 +29,33 @@ $("form#createStudent").submit(function(e) {
         url: "../../../functions/student/create.php",
         type: 'POST',
         data: formData,
-        success: callback,
+        success: callbackk,
         cache: false,
         contentType: false,
         processData: false,
     });
 });
-function callback() {
-            Swal.fire(
-                'Success',
-                'Successfully Added ',
-                'success'
-            ).then((result) => {
-                if (result) {
-                   window.location.href="../../../layout/student/html/";
-                }
-              })
+function callbackk(data) {
+            var dd=JSON.parse(data);
+            if(dd.res=='success'){
+                Swal.fire(
+                    'Success',
+                    'Successfully Added ',
+                    'success'
+                ).then((result) => {
+                    if (result) {
+                       window.location.href="../../../layout/student/html/";
+                    }
+                  });
+            }
+            else{
+                Swal.fire(
+                    'warning',
+                    'check email,mobile,National id (May be Exist)',
+                    'warning'
+                );
+            }
+            
 }
 //#endregion
 
@@ -65,10 +76,10 @@ $(document).on("click", ".delete", function(e){
              type : "post",
              url : "../../../functions/student/delete.php",
              dataType : "json",  
-             data : {id:$('#sid').val(),picture:$('#sp').val()},
+             data : {id:$(this).attr('href'),picture:$(this).attr('picture')},
              cache : false,
-             success : function(data){
-               if(data.res == "success")
+             success : function(d){
+               if(d.res == "success")
                {
                  Swal.fire(
                    'Success',
@@ -108,7 +119,7 @@ $(document).on("click", ".edit", function(e){
              type : "post",
              url : "../../../functions/student/update.php",
              dataType : "json",  
-             data : {id:$('#sid').val(),fname:$('#fname').val(),lname:$('#lname').val(),city:$('#lname').val(),password:$('#pass').val(),},
+             data : {id:$(this).attr('href'),fname:$('#fname').val(),lname:$('#lname').val(),city:$('#lname').val(),password:$('#pass').val(),},
              cache : false,
              success : function(data){
                if(data.res == "success")
@@ -138,7 +149,7 @@ $(document).on("click", ".view", function(e){
             type : "post",
             url : "../../../functions/student/selectSingle.php",
             dataType : "json",  
-            data : {id:$('#sid').val()},
+            data : {id:$(this).attr('href')},
             cache : false,
             success : function(data){
                 Swal.fire({
@@ -147,7 +158,7 @@ $(document).on("click", ".view", function(e){
                         <h4>`+ "LastName: "+data[0].lname+`</h4><br>
                         <h4>`+ "City:  "+data[0].city+`</h4><br>
                         <h4>`+ "Faculty:  "+data[0].ffname+`</h4><br>
-                        <h4>`+ "Department:  "+data[0].ddname+`</h4><br>` ,
+                        <h4>`+ "Department:  "+ data[0].Dname+`</h4><br>` ,
                     showCancelButton: false,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
@@ -188,8 +199,9 @@ $(document).ready(function(){
 
 //#region department list of specific faculty
 $(document).ready(function(){
-    let level=0;
+    var level=0;
     $(".faculty").change(function(){
+        var len=0;
         $.ajax({
             url: '../../../functions/mainFunctions/getDepartmentList.php',
             data: {id: $(".faculty").val()},
@@ -197,8 +209,10 @@ $(document).ready(function(){
             dataType: 'JSON',
             success: function(response){
                 $(".department").empty();
-                $(".facultyLevels").append("<option value='' disabled selected hidden>Choose a Department</option>");
-                var len = response.length;
+                len = response.length;
+                if(len==0){
+                    $(".department").append("<option value='' selected >General Department</option>");
+                    }
                 for(let i=0; i<len; i++){
                     let id = response[i].id;
                     let name = response[i].name;
@@ -206,10 +220,20 @@ $(document).ready(function(){
                     let option = "<option value='"+id+"'>"+name+"</optoin>";
                     $(".department").append(option);
                 }
+                if(len<1){
+                    swal.fire(
+                        "warning",
+        `<pre><b>User</b> will be in :->
+        General Department 
+        level will be 1 if <b>Student</b></pre>`,
+                    );
+                }
             },
             complete: function(){
                 $(".facultyLevels").empty();
-                $(".facultyLevels").append("<option value='' disabled selected hidden>Choose a Level</option>");
+                if(len==0){
+                    $(".facultyLevels").append("<option value='' selected>LeveL 1</option>");
+                }
                 for(let i=1; i<=level; i++){
                     let option = "<option value='"+i+"'>"+'LEVEL '+i+"</optoin>";
                     $(".facultyLevels").append(option);
@@ -330,7 +354,7 @@ $(document).on("click", ".deleteP", function(e){
             type : "post",
             url : "../../../functions/professor/delete.php",
             dataType : "json",  
-            data : {id:$('#idP').val(),picture:$('#pP').val()},
+            data : {id:$(this).attr('href'),picture:$(this).attr('picture')},
             cache : false,
             success : function(data){
             if(data.res == "success")
@@ -373,7 +397,7 @@ $(document).on("click", ".editP", function(e){
              type : "post",
              url : "../../../functions/professor/update.php",
              dataType : "json",  
-             data : {id:$('#idP').val(),fname:$('#fname').val(),lname:$('#lname').val(),city:$('#city').val(),password:$('#pass').val(),},
+             data : {id:$(this).attr('href'),fname:$('#fname').val(),lname:$('#lname').val(),city:$('#city').val(),password:$('#pass').val(),},
              cache : false,
              success : function(data){
                if(data.res == "success")
@@ -403,7 +427,7 @@ $(document).on("click", ".viewP", function(e){
     type : "post",
     url : "../../../functions/professor/selectSingle.php",
     dataType : "json",  
-    data : {id:$('#idP').val()},
+    data : {id: $(this).attr('href')},
     cache : false,
     success : function(data){
         Swal.fire({
@@ -429,3 +453,151 @@ return false;})
 
 //#endregion
 
+//#region faculty ajax call
+    //#region create faculty account
+    $("form#createFaculty").submit(function(e) {
+        e.preventDefault();    
+        var formData = new FormData(this);
+    
+        $.ajax({
+            url: "../../../functions/faculty/create.php",
+            type: 'POST',
+            data: formData,
+            success: callbackf,
+            cache: false,
+            contentType: false,
+            processData: false,
+        });
+    });
+    function callbackf(data) {
+        var dataa =JSON.parse(data);
+                if(dataa.res=='success'){
+                    Swal.fire(
+                        'Success',
+                        'Successfully Added ',
+                        'success'
+                    ).then((result) => {
+                        if (result) {
+                           window.location.href="../../../layout/faculty/html/index.php";
+                        }
+                      });
+                }
+                else{
+                    Swal.fire(
+                        'warning',
+                        'check data enter my be inserted before',
+                        'warning'
+                    );
+                }
+                
+    }
+    //#endregion
+    
+        //#region delete faculty account
+    $(document).on("click", ".deleteF", function(e){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You Want To Delete this faculty!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.value) {
+                e.preventDefault();
+                $.ajax({
+                 type : "post",
+                 url : "../../../functions/faculty/delete.php",
+                 dataType : "json",  
+                 data : {id:$(this).attr('id'),picture:$(this).attr('picture')},
+                 cache : false,
+                 success : function(d){
+                    alert(d.res);
+                   if(d.res == "success")
+                   {
+                     Swal.fire(
+                       'Success',
+                       'Selected faculty successfully deleted',
+                       'success'
+                     )
+                     location.reload();
+                   }
+                 },
+                 error : function(xhr, ErrorStatus, error){
+                   console.log(status.error);
+                 }
+               });
+            }
+          })
+        return false;
+      });
+    //#endregion
+    
+        //#region update faculty account
+    $(document).on("click", ".editF", function(e){
+        Swal.fire({
+            title: 'Are you sure?',
+            html: ` <input type='text' id='name' name='name' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Name '/>
+                    <input type='text' id='description' name='description' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Put another Description '/>`,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.value) {
+                e.preventDefault();
+                $.ajax({
+                 type : "post",
+                 url : "../../../functions/faculty/update.php",
+                 dataType : "json",  
+                 data : {id:$(this).attr('id'),name:$('#name').val(),description:$('#description').val()},
+                 cache : false,
+                 success : function(data){
+                   if(data.res == "success")
+                   {
+                     Swal.fire(
+                       'Success',
+                       'Selected student successfully updated',
+                       'success'
+                     )
+                     location.reload();
+                   }
+                 },
+                 error : function(xhr, ErrorStatus, error){
+                   console.log(status.error);
+                 }
+               });
+            }
+          })
+        return false;
+      });
+    //#endregion
+    
+        //#region selectSingle faculty
+    $(document).on("click", ".viewF", function(e){
+        e.preventDefault();
+    $.ajax({
+    type : "post",
+    url : "../../../functions/faculty/selectSingle.php",
+    dataType : "json",  
+    data : {id: $(this).attr('href')},
+    cache : false,
+    success : function(data){
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          window.location.href = "../../../layout/faculty/html/Details.php?id="+data[0].id;
+    },
+    error : function(xhr, ErrorStatus, error){
+    console.log(status.error);
+    }
+    });return false;})
+    //#endregion
+    
+    //#endregion

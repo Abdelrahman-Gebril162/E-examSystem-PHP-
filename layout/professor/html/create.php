@@ -121,7 +121,7 @@ include "../../../layout/professor/html/header.php";
                     <div class="row">
                         <div class="col-lg-3 " style="text-align: center;"></div>
                         <div class="col-lg-6 " style="text-align: center;">  
-                             <select class="department" id="select" name="department" required>
+                             <select class="department" id="select" name="department">
                                 <option value="" disabled selected hidden>Choose a Department</option>
                                 
                              </select>

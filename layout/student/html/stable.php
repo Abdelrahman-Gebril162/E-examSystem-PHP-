@@ -57,13 +57,11 @@
                         <td><?php echo$row['ddname'];?></td>
                         <td><?php echo $row['city'];?></td>
                         <td><!--url  ../../../functions -->
-                            <a href="#/id=<?php echo $row['id'];?>" class="view" title="View" data-toggle="tooltip"><i class="fas fa-eye"></i></a>
-                            <a href="#/id=<?php echo $row['id']; ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                            <a href="#/id=<?php echo $row['id']; ?>" class="delete" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+                            <a href="<?php echo $row['id'];?>" class="view" title="View" data-toggle="tooltip"><i class="fas fa-eye"></i></a>
+                            <a href="<?php echo $row['id']; ?>" class="edit" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
+                            <a href="<?php echo $row['id']; ?>" class="delete" picture="<?php echo $row['picture']; ?>" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
                         </td>
                         </tr>
-                        <input type="hidden" name="id" id="sid" value="<?php echo $row['id'];?>">
-                        <input type="hidden" name="picture" id="sp" value="<?php echo $row['picture'];?>">
                         <?php } ?>
                 <?php
                 }

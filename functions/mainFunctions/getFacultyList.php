@@ -4,7 +4,7 @@ include "conn.php";
 
 $return_arr = array();
 
-$query = "SELECT * FROM faculty";
+$query = "SELECT * FROM faculty where name!='university'";
 
 $result = $conn->query($query);
 
