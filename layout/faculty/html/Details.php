@@ -34,8 +34,8 @@
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="../../../layout/faculty/html/facultyProf.php?id=<?php echo $res[0]["id"];?>">Professors</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="../../../layout/faculty/html/facultyDepartment.php?id=<?php echo $res[0]["id"];?>">Departments</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="../../../layout/faculty/html/facultyStudent.php?id=<?php echo $res[0]["id"];?>">Students</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="../../../layout/faculty/html/Details.php?id=<?php echo $res[0]["id"];?>">Courses</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 exam" href="../../../layout/faculty/html/Details.php?id=<?php echo $res[0]["id"];?>">Exams</a>
+                <!--<a class="list-group-item list-group-item-action list-group-item-light p-3" href="../../../layout/faculty/html/Details.php?id=<?php echo $res[0]["id"];?>">Courses</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 exam" href="../../../layout/faculty/html/Details.php?id=<?php echo $res[0]["id"];?>">Exams</a>-->
             </div>
             
         </div>

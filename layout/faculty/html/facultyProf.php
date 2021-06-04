@@ -33,9 +33,9 @@
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="../../../layout/faculty/html/facultyProf.php?id=<?php if($res != null){echo $res[0]["faculty_id"];}else{extract($_GET);echo $id;}?>">Professors</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="../../../layout/faculty/html/facultyDepartment.php?id=<?php if($res != null){echo $res[0]["faculty_id"];}else{extract($_GET);echo $id;}?>">Departments</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="../../../layout/faculty/html/facultyStudent.php?id=<?php if($res != null){echo $res[0]["faculty_id"];}else{extract($_GET);echo $id;}?>">Students</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="../../../layout/faculty/html/Details.php?id=<?php if($res != null){echo $res[0]["faculty_id"];}else{extract($_GET);echo $id;}?>">Courses</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 exam" href="../../../layout/faculty/html/Details.php?id=<?php if($res != null){echo $res[0]["faculty_id"];}else{extract($_GET);echo $id;}?>">Exams</a>
-            </div>
+                <!--<a class="list-group-item list-group-item-action list-group-item-light p-3" href="../../../layout/faculty/html/Details.php?id=<?php if($res != null){echo $res[0]["faculty_id"];}else{extract($_GET);echo $id;}?>">Courses</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 exam" href="../../../layout/faculty/html/Details.php?id=<?php if($res != null){echo $res[0]["faculty_id"];}else{extract($_GET);echo $id;}?>">Exams</a>-->
+                </div>
             
         </div>
         <!-- Page content wrapper-->

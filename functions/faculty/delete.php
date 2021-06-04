@@ -1,5 +1,5 @@
 <?php 
-include("functions/mainFunctions/conn.php");
+include("../../functions/mainFunctions/conn.php");
 //include("functions/mainFunctions/conn.php");
 extract($_POST);
 $delstudent = $conn->query("SELECT picture FROM student WHERE faculty_id='$id'");

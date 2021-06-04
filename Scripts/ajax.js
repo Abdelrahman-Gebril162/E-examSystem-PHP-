@@ -191,7 +191,27 @@ $(document).ready(function(){
                 let option = "<option value='"+id+"'>"+name+"</optoin>";
                 $(".faculty").append(option);
             }
-            
+        }
+    });
+});
+//#endregion
+
+//#region professor list
+$(document).on('change','.faculty',function(){
+    $.ajax({
+        url: '../../../functions/mainFunctions/getProfessor.php',
+        type: 'GET',
+        data: {id:$(".faculty").val()},
+        success: function(response){
+            var da = JSON.parse(response);
+            console.log(da);
+            var len = da.length;
+            for(let i=0; i<len; i++){
+                let id = da[i].id;
+                let name = da[i].name;
+                let option = "<option value='"+id+"'>"+name+"</optoin>";
+                $(".professor").append(option);
+            }
         }
     });
 });
@@ -601,3 +621,719 @@ return false;})
     //#endregion
     
     //#endregion
+
+//#region Department ajax call
+    //#region create department faculty account
+    $("form#createDepartment").submit(function(e) {
+        e.preventDefault(); 
+        var formData = new FormData(this);
+        
+        $.ajax({
+            url: "../../../functions/department/create.php",
+            type: 'POST',
+            data: formData,
+            success: callbackD,
+            cache: false,
+            contentType: false,
+            processData: false,
+        });
+    });
+    function callbackD(data) {
+        var dataa =JSON.parse(data);
+                if(dataa.res=='success'){
+                    Swal.fire(
+                        'Success',
+                        'Successfully Added ',
+                        'success'
+                    ).then((result) => {
+                        if (result) {
+                           //window.location.href="../../../layout/department/html/stable.php";
+                        }
+                      });
+                }
+                else{
+                    Swal.fire(
+                        'error',
+                        'This Department Created Before',
+                        'error'
+                    );
+                }
+                
+    }
+    //#endregion
+    
+    //#region delete department account
+    $(document).on("click", ".deleteD", function(e){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You Want To Delete this Department!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.value) {
+                e.preventDefault();
+                $.ajax({
+                 type : "post",
+                 url : "../../../functions/department/delete.php",
+                 dataType : "json",  
+                 data : {id:$(this).attr('id')},
+                 cache : false,
+                 success : function(d){
+                   if(d.res == "success")
+                   {
+                     Swal.fire(
+                       'Success',
+                       'Selected faculty successfully deleted',
+                       'success'
+                     )
+                     location.reload();
+                   }
+                 },
+                 error : function(xhr, ErrorStatus, error){
+                   console.log(status.error);
+                 }
+               });
+            }
+          })
+        return false;
+      });
+    //#endregion
+    
+    //#region update department account
+    $(document).on("click", ".editD", function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            html: ` <input type='text' id='name' name='name' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Name '/>
+                    <input type='text' id='description' name='description' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Put another Description '/>`,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                 type : "post",
+                 url : "../../../functions/department/update.php",
+                 dataType : "json",  
+                 data : {id:$(this).attr('id'),name:$('#name').val(),description:$('#description').val()},
+                 cache : false,
+                 success : function(data){
+                   if(data.res == "success")
+                   {
+                     Swal.fire(
+                       'Success',
+                       'Selected Department successfully updated',
+                       'success'
+                     )
+                     location.reload();
+                   }
+                 },
+                 error : function(xhr, ErrorStatus, error){
+                   console.log(status.error);
+                 }
+               });
+            }
+          })
+        return false;
+      });
+    //#endregion
+    
+    //#region selectSingle department
+    $(document).on("click", ".viewD", function(e){
+        e.preventDefault();
+        $.ajax({
+        type : "post",
+        url : "../../../functions/department/selectSingle.php",
+        dataType : "json",  
+        data : {id: $(this).attr('href')},
+        cache : false,
+        success : function(data){
+            Swal.fire({
+                html: `<h3>Department Faculty LOGO </h3>
+                    <img src='`+data[0].logo+`' Title="Faculty Logo" style="width:200px;height:200px;border-radius:50%">
+                    <h4>`+ "Name: "+data[0].name+`</h4><br>
+                    <h4>`+ "Faculty Name: "+data[0].fname+`</h4><br>
+                    <h4>`+ "Description:  "+data[0].description+`</h4><br>
+                    ` ,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              });
+        
+        },
+        error : function(xhr, ErrorStatus, error){
+        console.log(status.error);
+        }
+    });
+    return false;})
+    //#endregion
+    
+//#endregion
+
+//#region Course ajax call
+    //#region create course account
+    $("form#createCourse").submit(function(e) {
+        e.preventDefault(); 
+        var formData = new FormData(this);
+        
+        $.ajax({
+            url: "../../../functions/course/create.php",
+            type: 'POST',
+            data: formData,
+            success: callbackD,
+            cache: false,
+            contentType: false,
+            processData: false,
+        });
+    });
+    function callbackD(data) {
+        var dataa =JSON.parse(data);
+                if(dataa.res=='success'){
+                    Swal.fire(
+                        'Success',
+                        'Successfully Added ',
+                        'success'
+                    )/*.then((result) => {
+                        if (result) {
+                           //window.location.href="../../../layout/department/html/stable.php";
+                        }
+                      });*/
+                }
+                else{
+                    Swal.fire(
+                        'error',
+                        'This Course Created Before',
+                        'error'
+                    );
+                }
+                
+    }
+    //#endregion
+    
+    //#region delete course account
+    $(document).on("click", ".deleteC", function(e){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You Want To Delete this Course!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.value) {
+                e.preventDefault();
+                $.ajax({
+                 type : "post",
+                 url : "../../../functions/course/delete.php",
+                 dataType : "json",  
+                 data : {id:$(this).attr('id')},
+                 cache : false,
+                 success : function(d){
+                   if(d.res == "success")
+                   {
+                     Swal.fire(
+                       'Success',
+                       'Selected faculty successfully Course',
+                       'success'
+                     )
+                     location.reload();
+                   }
+                 },
+                 error : function(xhr, ErrorStatus, error){
+                   console.log(status.error);
+                 }
+               });
+            }
+          })
+        return false;
+      });
+    //#endregion
+    
+    //#region update department account
+    $(document).on("click", ".editC", function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            html: ` <input type='text' id='name' name='name' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Name '/>
+                    <input type='text' id='description' name='description' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Put another Description '/>`,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                 type : "post",
+                 url : "../../../functions/course/update.php",
+                 dataType : "json",  
+                 data : {id:$(this).attr('id'),name:$('#name').val(),description:$('#description').val()},
+                 cache : false,
+                 success : function(data){
+                   if(data.res == "success")
+                   {
+                     Swal.fire(
+                       'Success',
+                       'Selected Course successfully updated',
+                       'success'
+                     )
+                     location.reload();
+                   }
+                 },
+                 error : function(xhr, ErrorStatus, error){
+                   console.log(status.error);
+                 }
+               });
+            }
+          })
+        return false;
+      });
+    //#endregion
+    
+    //#region selectSingle department
+    $(document).on("click", ".viewC", function(e){
+        e.preventDefault();
+        $.ajax({
+        type : "post",
+        url : "../../../functions/course/selectSingle.php",
+        dataType : "json",  
+        data : {id: $(this).attr('href')},
+        cache : false,
+        success : function(data){
+            Swal.fire({
+                html: `<h3>Course Faculty LOGO </h3>
+                    <img src='`+data[0].logo+`' Title="Faculty Logo" style="width:200px;height:200px;border-radius:50%">
+                    <h4>`+ "Name: "+data[0].name+`</h4><br>
+                    <h4>`+ "Faculty Name: "+data[0].fname+`</h4><br>
+                    <h4>`+ "Description:  "+data[0].description+`</h4><br>
+                    ` ,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              });
+        
+        },
+        error : function(xhr, ErrorStatus, error){
+        console.log(status.error);
+        }
+    });
+    return false;})
+    //#endregion
+    
+//#endregion
+
+//#region studentCourseEn ajax call
+    //#region getAllStudent
+ $(document).ready(function(){
+    $.ajax({
+        url: '../../../functions/studentCourseEn/allStudent.php',
+        type: 'get',
+        dataType: 'json',
+        success: function(response){
+            var scnn=response;
+            var len= scnn.length;
+            for(let i=0; i<len; i++){
+                let id = scnn[i].id;
+                let fname = scnn[i].fname;
+                let lname = scnn[i].lname;
+                let option = "<option value='"+id+"' class='ss' fId='"+scnn[i].faculty_id+"' level='"+scnn[i].level+"'>"+fname+" "+lname +" id:"+ id+"</optoin>";
+                $(".StudentName").append(option);
+            }
+        }
+    });
+    });
+ //#endregion getAllStudent
+    //#region getCourseForStudent
+    $(document).on('change','.StudentName',function(){
+        $.ajax({
+            url: '../../../functions/studentCourseEn/getCourse.php',
+            type: 'post',
+            data:{fId:$( ".StudentName option:selected").attr('fId'),level:$( ".StudentName option:selected").attr('level')},
+            dataType: 'json',
+            success: function(response){
+                var scnn=response;
+                var len= scnn.length;
+                for(let i=0; i<len; i++){
+                    let id = scnn[i].id;
+                    let name = scnn[i].name;
+                    let option = "<option value='"+id+"'>"+name+"</optoin>";
+                    $(".CourseName").append(option);
+                }
+                if(len==0){
+                    swal.fire(
+                        'error',
+                        'There is no Course For You Now',
+                        'error'
+                    )
+                }
+            }
+        });
+        });
+    //#endregion getCourseForStudent
+
+    //#region create courseEn account
+    $("form#createCourseEn").submit(function(e) {
+        e.preventDefault(); 
+        var formData = new FormData(this);
+        
+        $.ajax({
+            url: "../../../functions/studentCourseEn/create.php",
+            type: 'POST',
+            data: formData,
+            success: callbackCourse,
+            cache: false,
+            contentType: false,
+            processData: false,
+        });
+    });
+    function callbackCourse(data) {
+        var dataa =JSON.parse(data);
+                if(dataa.res=='success'){
+                    Swal.fire({
+                        title: 'Do You Want To Add More',
+                        icon: 'question',
+                        iconHtml: '؟',
+                        confirmButtonText: 'YES',
+                        cancelButtonText: 'NO',
+                        showCancelButton: true,
+                        showCloseButton: true
+                      }).then((result) => {
+                        if(result){
+                          location.reload();
+                        }
+                        else{
+                          $('body').slideToggle(3000);
+                        }
+                      });
+                }
+                else{
+                    Swal.fire(
+                        'error',
+                        'This Course  Add Before',
+                        'error'
+                    );
+                }
+                
+    }
+    //#endregion
+    
+    //#region delete courseEn account
+    $(document).on("click", ".deleteCE", function(e){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You Want To Delete this Course!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.value) {
+                e.preventDefault();
+                $.ajax({
+                 type : "post",
+                 url : "../../../functions/studentCourseEn/delete.php",
+                 dataType : "json",  
+                 data : {id:$(this).attr('id')},
+                 cache : false,
+                 success : function(d){
+                   if(d.res == "success")
+                   {
+                     Swal.fire(
+                       'Success',
+                       'Selected faculty successfully Course',
+                       'success'
+                     )
+                     location.reload();
+                   }
+                 },
+                 error : function(xhr, ErrorStatus, error){
+                   console.log(status.error);
+                 }
+               });
+            }
+          })
+        return false;
+      });
+    //#endregion
+    
+    //#region update CourseEn account dont need it now
+    $(document).on("click", ".edi", function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            html: ` <input type='text' id='name' name='name' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Name '/>
+                    <input type='text' id='description' name='description' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Put another Description '/>`,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                 type : "post",
+                 url : "../../../functions/course/update.php",
+                 dataType : "json",
+                 data : {id:$(this).attr('id'),name:$('#name').val(),description:$('#description').val()},
+                 cache : false,
+                 success : function(data){
+                   if(data.res == "success")
+                   {
+                     Swal.fire(
+                       'Success',
+                       'Selected Course successfully updated',
+                       'success'
+                     )
+                     location.reload();
+                   }
+                 },
+                 error : function(xhr, ErrorStatus, error){
+                   console.log(status.error);
+                 }
+               });
+            }
+          })
+        return false;
+      });
+    //#endregion
+    
+    //#region selectSingle CourseEn dont need it now 
+    $(document).on("click", ".vie", function(e){
+        e.preventDefault();
+        $.ajax({
+        type : "post",
+        url : "../../../functions/course/selectSingle.php",
+        dataType : "json",  
+        data : {id: $(this).attr('href')},
+        cache : false,
+        success : function(data){
+            Swal.fire({
+                html: `<h3>Course Faculty LOGO </h3>
+                    <img src='`+data[0].logo+`' Title="Faculty Logo" style="width:200px;height:200px;border-radius:50%">
+                    <h4>`+ "Name: "+data[0].name+`</h4><br>
+                    <h4>`+ "Faculty Name: "+data[0].fname+`</h4><br>
+                    <h4>`+ "Description:  "+data[0].description+`</h4><br>
+                    ` ,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              });
+        
+        },
+        error : function(xhr, ErrorStatus, error){
+        console.log(status.error);
+        }
+    });
+    return false;})
+    //#endregion
+    
+//#endregion
+
+//#region chapters ajax call
+        //#region getCourse
+        $(document).ready(function(){
+            $.ajax({
+                url: '../../../functions/chapters/getCourse.php',
+                type: 'post',
+                dataType: 'json',
+                success: function(response){
+                    var scnn=response;
+                    var len= scnn.length;
+                    for(let i=0; i<len; i++){
+                        let id = scnn[i].id;
+                        let name = scnn[i].name;
+                        let option = "<option value='"+id+"'>" + name + "</option>";
+                        $('.c').append(option);//hhhhhhhhh
+                    }
+                    if(len==0){
+                        swal.fire(
+                            'error',
+                            'There is no Course For NOW',
+                            'error'
+                        )
+                    }
+                }
+            });
+        });
+        //#endregion getCourseForStudent
+    
+        //#region create chapters account
+        $("form#createChapter").submit(function(e) {
+            e.preventDefault(); 
+            var formData = new FormData(this);
+            
+            $.ajax({
+                url: "../../../functions/chapters/create.php",
+                type: 'POST',
+                data: formData,
+                success: callbackChapter,
+                cache: false,
+                contentType: false,
+                processData: false,
+            });
+        });
+        function callbackChapter(data) {
+            var dataa =JSON.parse(data);
+                    if(dataa.res=='success'){
+                        Swal.fire({
+                            title: 'Do You Want To Add More',
+                            icon: 'question',
+                            iconHtml: '؟',
+                            confirmButtonText: 'YES',
+                            cancelButtonText: 'NO',
+                            showCancelButton: true,
+                            showCloseButton: true
+                          }).then((result) => {
+                            if(result.isConfirmed){
+                              location.reload();
+                            }
+                            else{
+                                window.location.href="../../../layout/chapters/html/stable.php";
+                            }
+                          });
+                    }
+                    else if (dataa.res =="max"){
+                        Swal.fire(
+                            'error',
+                            'reach maximum Number of Chapters',
+                            'error'
+                        );}
+                    else if (dataa.res =="founded"){
+                            Swal.fire(
+                                'error',
+                                'Chapter is Created Before',
+                                'error'
+                            );}
+                    else{
+                        Swal.fire(
+                            'error',
+                            'Invalid insertion',
+                            'error'
+                        );}
+                    }
+        //#endregion
+        
+        //#region delete chapters account
+        $(document).on("click", ".deleteCC", function(e){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You Want To Delete this Chapter!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                if (result.value) {
+                    e.preventDefault();
+                    $.ajax({
+                     type : "post",
+                     url : "../../../functions/chapters/delete.php",
+                     dataType : "json",  
+                     data : {id:$(this).attr('id')},
+                     cache : false,
+                     success : function(d){
+                       if(d.res == "success")
+                       {
+                         Swal.fire(
+                           'Success',
+                           'Selected Chapter successfully Deleted',
+                           'success'
+                         )
+                         location.reload();
+                       }
+                     },
+                     error : function(xhr, ErrorStatus, error){
+                       console.log(status.error);
+                     }
+                   });
+                }
+              })
+            return false;
+          });
+        //#endregion
+        
+        //#region update chapters account dont need it now
+        $(document).on("click", ".editCC", function(e){
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                html: ` <input type='text' id='title' name='title' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Change title '/>
+                        `,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                     type : "post",
+                     url : "../../../functions/chapters/update.php",
+                     dataType : "json",
+                     data : {id:$(this).attr('id'),title:$('#title').val()},
+                     cache : false,
+                     success : function(data){
+                       if(data.res == "success")
+                       {
+                         Swal.fire(
+                           'Success',
+                           'Selected Chapter successfully updated',
+                           'success'
+                         )
+                         location.reload();
+                       }
+                     },
+                     error : function(xhr, ErrorStatus, error){
+                       console.log(status.error);
+                     }
+                   });
+                }
+              })
+            return false;
+          });
+        //#endregion
+        
+        //#region selectSingle CourseEn dont need it now 
+        $(document).on("click", ".viewCC", function(e){
+            e.preventDefault();
+            $.ajax({
+            type : "post",
+            url : "../../../functions/chapters/selectSingle.php",
+            dataType : "json",  
+            data : {id: $(this).attr('href')},
+            cache : false,
+            success : function(data){
+                Swal.fire({
+                    html: `<h3>Course Faculty LOGO </h3>
+                        <img src='`+data[0].logo+`' Title="Faculty Logo" style="width:200px;height:200px;border-radius:50%">
+                        <h4>`+ "Chapter Name: "+data[0].title+`</h4><br>
+                        <h4>`+ "Faculty Name: "+data[0].FN+`</h4><br>
+                        <h4>`+ "Course Name:  "+data[0].CC+`</h4><br>
+                        ` ,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                  });
+            
+            },
+            error : function(xhr, ErrorStatus, error){
+            console.log(status.error);
+            }
+        });
+        return false;})
+        //#endregion
+        
+//#endregion
+    

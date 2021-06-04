@@ -18,7 +18,7 @@
             <div class="nav-links">
                 <ul>
                     <li><a href="/E-examSystem/layout/faculty/html/index.php">Faculties</a></li>
-                    <li><a href="\ChatApp">ChatApp</a></li>
+                    <li><a href="#">ChatApp</a></li>
                     <li> <a href="#about">About us</a></li>
                     <li><a href="#contact">Contact us </a></li>
                     <li><a href="#">Exams </a></li>
@@ -28,19 +28,19 @@
                                 Adminstration ▼
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Roles</a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/E-examSystem/layout/student/html/">Student</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/E-examSystem/layout/professor/html/">Professor</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/E-examSystem/layout/faculty/html/stable.php">Faculties</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Departments</a>
+                                <a class="dropdown-item" href="/E-examSystem/layout/department/html/stable.php">Departments</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Courses</a>
+                                <a class="dropdown-item" href="/E-examSystem/layout/course/html/stable.php">Courses</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Enrolement</a>
+                                <a class="dropdown-item" href="/E-examSystem/layout/chapters/html/stable.php">Chapters</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/E-examSystem/layout/studentCourseEn/html/stable.php">Enrolement</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Exam</a>
                             </div>

@@ -37,18 +37,21 @@
                 <div class="nav-links">
                     <ul>
                         <li>
-                            <a href="#">Faculties</a>
-
+                            <a href="../../../layout/faculty/html/index.php">Faculties</a>
                         </li>
 
-                        <li> <a href="#">Log in</a></li>
-                        <li><a href="#">Register</a></li>
-                        <li><a href="#">My Profile</a></li>
-                        <li><a href="#">Courses</a></li>
-
+                        <li> <a href="../../../index.php">Home</a></li>
                     </ul>
                 </div>
-
+                <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-circle" style="width: 30px;height:30px"></i>
+            </button>
+            <?php if(isset($_SESSION['loginSession']['login']) == true){include ("../../../layout/login/html/loggedin.html");}
+            else {
+                include ("../../../layout/login/html/logout.html");
+            }?>
+            </div>
                 <div>
                     <img src="../images/logo.png" class="img-responsive" alt="">
                     
