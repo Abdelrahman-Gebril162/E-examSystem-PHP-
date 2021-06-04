@@ -26,7 +26,7 @@
                     <?php } ?>
                     <?php } ?>
                     <?php if(isset($_SESSION['loginSession']['login']) == true) { ?>
-                    <?php if($_SESSION['loginSession']['role_id'] != 2) { ?>
+                    <?php if($_SESSION['loginSession']['role_id'] == 1) { ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Adminstration ▼
@@ -42,17 +42,40 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/E-examSystem/layout/course/html/stable.php">Courses</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/E-examSystem/layout/chapters/html/stable.php">Chapters</a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/E-examSystem/layout/studentCourseEn/html/stable.php">Enrolement</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Exam</a>
                             </div>
                         </li>
                     <?php } ?>
                     <?php } ?>
+                    <?php if(isset($_SESSION['loginSession']['login']) == true) { ?>
+                                <?php if($_SESSION['loginSession']['role_id'] == 3) { ?>
+                                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Professor Adminstration ▼
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/E-examSystem/layout/chapters/html/stable.php">Chapters</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Exam</a>
+                                </div>
+                                </li>
+                                <?php } ?>
+                                <?php } ?>
+                                <?php if(isset($_SESSION['loginSession']['login']) == true) { ?>
+                                <?php if($_SESSION['loginSession']['role_id'] == 2) { ?>
+                                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Student Adminstration ▼
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/E-examSystem/layout/studentCourseEn/html/stable.php">Enrolement</a>
+                                </div>
+                                </li>
+                                <?php } ?>
+                                <?php } ?>
                 </ul>
-
             </div>
             <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
