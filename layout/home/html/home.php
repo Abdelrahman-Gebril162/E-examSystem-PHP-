@@ -1,4 +1,3 @@
-
 <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="layout/home/css/style.css"> 
 <section class="lets-learn">
@@ -21,8 +20,13 @@
                     <li><a href="#">ChatApp</a></li>
                     <li> <a href="#about">About us</a></li>
                     <li><a href="#contact">Contact us </a></li>
-                    <li><a href="#">Exams </a></li>
-                    
+                    <?php if(isset($_SESSION['loginSession']['login']) == true) { ?>
+                    <?php if($_SESSION['loginSession']['role_id'] == 2) { ?>
+                    <li><a href="/E-examSystem/docs/exam%20file/html/exam%20copy.html">Exams </a></li>
+                    <?php } ?>
+                    <?php } ?>
+                    <?php if(isset($_SESSION['loginSession']['login']) == true) { ?>
+                    <?php if($_SESSION['loginSession']['role_id'] != 2) { ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Adminstration ▼
@@ -45,7 +49,8 @@
                                 <a class="dropdown-item" href="#">Exam</a>
                             </div>
                         </li>
-                    
+                    <?php } ?>
+                    <?php } ?>
                 </ul>
 
             </div>

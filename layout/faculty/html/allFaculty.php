@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -50,7 +51,7 @@
             <?php if(isset($_SESSION['loginSession']['login']) == true){include ("../../../layout/login/html/loggedin.html");}
             else {
                 include ("../../../layout/login/html/logout.html");
-            }?>
+            } ?>
             </div>
                 <div>
                     <img src="../images/logo.png" class="img-responsive" alt="">

@@ -279,7 +279,7 @@ $(".logout").click(function(){
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.value) {
-          window.location.href = "functions/logout/logout.php";
+          window.location.href = "/E-examSystem/functions/logout/logout.php";
           $('body').fadeToggle(3000);
         }
       })
