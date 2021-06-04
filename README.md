@@ -7,11 +7,12 @@ The world today is turning all manual process to computerized system. So our tar
 2. use any text editor
 
 ##how to setup project
-1.start Xampp apache and mysql
-2.go to phpmyadmin panal and create database name it  "examdb"
-3.import examdb file inside this project in database file to structure the database tables
-4.after importing go to browser type "http://localhost/E-examSystem/"
-5.finish project work
+
+1. start Xampp apache and mysql
+2. go to phpmyadmin panal and create database name it  "examdb"
+3. import examdb file inside this project in database file to structure the database tables
+4. after importing go to browser type "http://localhost/E-examSystem/"
+5. finish project work
 
 ### Team work
 1. Abdelrahman Gebril Wadaa Allah (team leader, full-stack web develober)
