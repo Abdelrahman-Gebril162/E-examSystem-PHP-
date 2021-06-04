@@ -6,7 +6,7 @@ The world today is turning all manual process to computerized system. So our tar
 1. Xampp: to create database and work with php
 2. use any text editor
 
-##how to setup project
+## how to setup project
 
 1. start Xampp apache and mysql
 2. go to phpmyadmin panal and create database name it  "examdb"
