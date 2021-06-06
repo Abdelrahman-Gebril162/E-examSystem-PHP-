@@ -1336,4 +1336,238 @@ return false;})
         //#endregion
         
 //#endregion
-    
+
+//#region question ajax call
+        //#region get all chapter of specific course
+        $(document).on('change','.c',function(){
+        $.ajax({
+            url: '../../../functions/question/getChapter.php',
+            type: 'post',
+            data:{Cid:$(this).val()},
+            dataType: 'json',
+            success: function(response){
+                var scnn=response;
+                var len= scnn.length;
+                $(".chapter").empty();
+                for(let i=0; i<len; i++){
+                    let id = scnn[i]["id (pk)"];
+                    let name = scnn[i].title;
+                    let option = "<option value='"+id+"'>"+name+"</optoin>";
+                    $(".chapter").append(option);
+                }
+                if(len==0){
+                    swal.fire(
+                        'error',
+                        'This Course Does Not Have Any Chapter',
+                        'error'
+                    )
+                }
+            }
+        });
+        });
+        //#endregion
+        //#region question type checking
+        $(".qt").change(function(e) {
+            e.preventDefault(); 
+            var qtype = $(".qt option:selected").val();
+            if(qtype == "mcq"){
+                $(".ana").show();
+                $(".anb").show();
+                $(".anc").show();
+                $(".and").show();
+                $(".o3").show();
+                $(".o4").show();
+            }
+            else if(qtype == "tf"){
+                $(".o1").text("True 1");
+                $(".o2").text("False 2");
+                $(".ana").val("True");
+                $(".ana").attr('readonly',true);
+                $(".anb").val("False");
+                $(".anb").attr('readonly',true);
+                $(".anc").hide();
+                $(".and").hide();
+                $(".o3").hide();
+                $(".o4").hide();
+                $(".anc").attr("required",false);
+                $(".and").attr("required",false);
+                $(".o3").attr("required",false);
+                $(".o4").attr("required",false);
+            }
+            });
+        //#endregion disable header
+        //#region header type checking
+        $(".ht").change(function(e) {
+            e.preventDefault();
+            var qtype = $(".ht option:selected").val();
+            if(qtype == "snt"){
+                $(".header").show();
+                $(".headerva").hide();
+                $(".vaSource").attr("required",false);
+                $(".vaSource").hide();
+            }
+            else if(qtype == "v" || qtype == "a"){
+                $(".labelH").show();
+                $(".header").show();
+                $(".vaSource").show();
+                $(".header").val("");
+                $(".vaSource").val("");
+                if(qtype == "a"){$(".vaSource").attr('accept','.mp3,.m4a');}
+                else{$(".vaSource").attr('accept','.mp4');}
+            }
+            });
+        //#endregion disable header
+        //#region create question account
+        $("form#createQuestion").submit(function(e) {
+            e.preventDefault(); 
+            var formData = new FormData(this);
+            $.ajax({
+                url: "../../../functions/question/create.php",
+                type: 'POST',
+                data: formData,
+                dataType:'json',
+                success: callbackQ,
+                cache: false,
+                contentType: false,
+                processData: false,
+            });
+        });
+        function callbackQ(data) {
+                    if(data.res=='success'){
+                        Swal.fire({
+                            title: 'Do You Want To Add More',
+                            icon: 'question',
+                            iconHtml: '؟',
+                            confirmButtonText: 'YES',
+                            cancelButtonText: 'NO',
+                            showCancelButton: true,
+                            showCloseButton: true
+                          }).then((result) => {
+                            if(result.isConfirmed){
+                              location.reload();
+                            }
+                            else{
+                                window.location.href="/E-examSystem/layout/question/html/stable.php";
+                            }
+                          });
+                    }
+                    else{
+                        Swal.fire(
+                            'error',
+                            'Invalid insertion',
+                            'error'
+                        );}
+                    }
+        //#endregion
+        
+        //#region delete question account
+        $(document).on("click", ".deleteQ", function(e){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You Want To Delete this Question!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                if (result) {
+                    e.preventDefault();
+                    $.ajax({
+                     type : "post",
+                     url : "../../../functions/question/delete.php",
+                     dataType : "json",  
+                     data : {id:$(this).attr('id')},
+                     cache : false,
+                     success : function(d){
+                       if(d.res == "success")
+                       {
+                         Swal.fire(
+                           'Success',
+                           'Selected Question successfully Deleted',
+                           'success'
+                         )
+                         location.reload();
+                       }
+                     },
+                     error : function(xhr, ErrorStatus, error){
+                       console.log(status.error);
+                     }
+                   });
+                }
+              })
+            return false;
+          });
+        //#endregion
+        
+        //#region update question account dont need it now
+        $(document).on("click", ".editQ", function(e){
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                html: ` <input type='text' id='header' name='header' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Change header '/>
+                        `,
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                     type : "post",
+                     url : "../../../functions/question/update.php",
+                     dataType : "json",
+                     data : {id:$(this).attr('id'),header:$('#header').val()},
+                     cache : false,
+                     success : function(data){
+                       if(data.res == "success")
+                       {
+                         Swal.fire(
+                           'Success',
+                           'Selected Question successfully updated',
+                           'success'
+                         )
+                         location.reload();
+                       }
+                     },
+                     error : function(xhr, ErrorStatus, error){
+                       console.log(status.error);
+                     }
+                   });
+                }
+              })
+            return false;
+          });
+        //#endregion
+        
+        //#region selectSingle CourseEn dont need it now 
+        $(document).on("click", ".viewQ", function(e){
+            e.preventDefault();
+            $.ajax({
+            type : "post",
+            url : "../../../functions/question/selectSingle.php",
+            dataType : "json",  
+            data : {id: $(this).attr('href')},
+            cache : false,
+            success : function(data){
+                Swal.fire({
+                    html: `
+                        <h4>`+ "Question : "+data[0].header+`</h4><br>
+                        ` ,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                  });
+            
+            },
+            error : function(xhr, ErrorStatus, error){
+            console.log(status.error);
+            }
+        });
+        return false;})
+        //#endregion
+        
+//#endregion
+

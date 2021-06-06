@@ -43,6 +43,8 @@
                                 <a class="dropdown-item" href="/E-examSystem/layout/course/html/stable.php">Courses</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/E-examSystem/layout/studentCourseEn/html/stable.php">Enrolement</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/E-examSystem/layout/question/html/stable.php">Question_bank</a>
                             </div>
                         </li>
                     <?php } ?>
