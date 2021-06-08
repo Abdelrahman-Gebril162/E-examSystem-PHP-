@@ -1153,7 +1153,7 @@ return false;})
                         let id = scnn[i].id;
                         let name = scnn[i].name;
                         let option = "<option value='"+id+"'>" + name + "</option>";
-                        $('.c').append(option);//hhhhhhhhh
+                        $('.c').append(option);
                     }
                     if(len==0){
                         swal.fire(
