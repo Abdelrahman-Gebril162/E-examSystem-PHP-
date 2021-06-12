@@ -70,14 +70,14 @@
                 <div class="row">
                     <div class="col-lg-3 " style="text-align: center;"></div>
                     <div class="col-lg-6 " style="text-align: center;">  
-                         <input type="number" class="form-control" name="duration" id="duration" min="0.5" max="3" step="0.5" placeholder="Duration of Exam (0.5:3)Hr" required>
+                         <input type="number" class="form-control" name="duration" id="duration" min="0.1" max="3" step="0.1" placeholder="Duration of Exam (0.5:3)Hr" required>
                     </div>
                     <div class="col-lg-3 " style="text-align: center;"></div>
                 </div></div>
                 <h3 style="text-align:center;Color:white">Set Question for each Chapter</h3>
             <div class="d-flex justify-content-center" id="ch1" style="width:42%;margin:20px auto;background-color:black">
                         
-                        <input type="number" onchange="findTotal()" class="form-control" placeholder="Q NUM" name="qnum" id="qnum" min="1" max="10">
+                        <input type="number" onchange="findTotal()" class="form-control" placeholder="Q NUM" name="qnum" id="qnum" min="1" max="10" required>
                         <select class="chapter form-select cha"   id="select" style="font:normal normal normal 12px/12px Arial;" name="chapter" required>
                         <option value="" disabled selected hidden>Chapter</option>
                         </select>

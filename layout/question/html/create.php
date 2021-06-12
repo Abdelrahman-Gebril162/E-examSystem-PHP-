@@ -72,7 +72,7 @@
                     <div class="col-lg-6 " style="text-align: center;">  
                          <input type="text" class="header" placeholder="header of Question" name="header" style="display:none;" required>
                          <label for="vaSource" class="labelH" style="color:white;font-size:30px;display:none;">Video | Audio File</label>
-                         <input type="file" name="vaSource" accept=".mp4,.mp3,.m4a" size="" class="vaSource form-control" style="font-size:30px;display:none;" placeholder="header of Question (audio, vidio)" name="headerva" required>
+                         <input type="file" name="vaSource" accept=".mp4,.mp3" size="" class="vaSource form-control" style="font-size:30px;display:none;" placeholder="header of Question (audio, vidio)" name="headerva" required>
                     </div>
                     <div class="col-lg-3 " style="text-align: center;"></div>
                 </div></div>

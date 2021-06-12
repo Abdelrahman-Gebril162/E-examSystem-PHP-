@@ -104,7 +104,7 @@ function callbackQ(data) {
                       location.reload();
                     }
                     else{
-                        window.location.href="/E-examSystem/layout/question/html/stable.php";
+                        window.location.href="/E-examSystem/layout/exam/html/stable.php";
                     }
                   });
             }
@@ -122,6 +122,115 @@ function callbackQ(data) {
                     );}
             }
 //#endregion
+
+//#region delete exam account
+$(document).on("click", ".deleteE", function(e){
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You Want To Delete this Exam!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+    }).then((result) => {
+        if (result) {
+            e.preventDefault();
+            $.ajax({
+            type : "post",
+            url : "../../../functions/exam/delete.php",
+            dataType : "json",  
+            data : {id:$(this).attr('id')},
+            cache : false,
+            success : function(d){
+            if(d.res == "success")
+            {
+                Swal.fire(
+                'Success',
+                'Selected exam successfully Deleted',
+                'success'
+                )
+                location.reload();
+            }
+            },
+            error : function(xhr, ErrorStatus, error){
+            console.log(status.error);
+            }
+        });
+        }
+      })
+    return false;
+  });
+//#endregion
+
+//#region update exam account dont need it now
+$(document).on("click", ".editE", function(e){
+    e.preventDefault();
+    Swal.fire({
+        title: 'Are you sure?',
+        html: ` <input type='text' id='title' name='title' style='background-color:white;color:black;border:1px solid gray;border-radius:20px' placeholder='Change Title '/>
+                `,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.value) {
+            $.ajax({
+             type : "post",
+             url : "../../../functions/exam/update.php",
+             dataType : "json",
+             data : {id:$(this).attr('id'),title:$('#title').val()},
+             cache : false,
+             success : function(data){
+               if(data.res == "success")
+               {
+                 Swal.fire(
+                   'Success',
+                   'Selected exam successfully updated',
+                   'success'
+                 )
+                 location.reload();
+               }
+             },
+             error : function(xhr, ErrorStatus, error){
+               console.log(status.error);
+             }
+           });
+        }
+      })
+    return false;
+  });
+//#endregion
+
+//#region selectSingle exam dont need it now 
+    $(document).on("click", ".viewE", function(e){
+        e.preventDefault();
+            $.ajax({
+            type : "post",
+            url : "../../../functions/exam/selectSingle.php",
+            dataType : "json",  
+            data : {id: $(this).attr('href')},
+            cache : false,
+            success : function(data){
+                Swal.fire({
+                    html: `
+                        <h4>`+ "Exam Name : "+data[0].title+`</h4><br>
+                        ` ,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                });
+            
+            },
+            error : function(xhr, ErrorStatus, error){
+            console.log(status.error);
+            }
+        });
+        return false;})
+        //#endregion
 
 //#region GET ALL QUESTION IN SPECIFIC CHAPTER AND COURSE
 $(document).ready(function(){
@@ -215,3 +324,5 @@ $(document).on("change",".cha:last",function(event){
         });
     });
 //#endregion 
+
+

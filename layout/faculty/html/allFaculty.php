@@ -48,9 +48,9 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-user-circle" style="width: 30px;height:30px"></i>
             </button>
-            <?php if(isset($_SESSION['loginSession']['login']) == true){include ("../../../layout/login/html/loggedin.html");}
+            <?php if(isset($_SESSION['loginSession']['login']) == true){include ("../../../layout/login/html/loggedin.php");}
             else {
-                include ("../../../layout/login/html/logout.html");
+                include ("../../../layout/login/html/logout.php");
             } ?>
             </div>
                 <div>

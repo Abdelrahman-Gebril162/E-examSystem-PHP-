@@ -17,7 +17,7 @@
         font-weight:bold;
     }
     .complete{
-        color:black
+        color:red;
     }
     .start{
         color:green;
@@ -47,14 +47,8 @@
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
-            <div class="row" style="margin:0;padding:0">
-                    <div class="col-sm-8"></div>
-                    <div class="col-sm-4">
-                    <a href="../../../layout/exam/html/create.php" id='add' class="btn btn-success" style="float:right;"><i class="fas fa-plus"></i> ADD</a>
-                    </div>
-                </div>
                 <div class="row" style="margin:0;padding:0">
-                    <div class="col-sm-8"><h1><b>Examination</b> Manegment</h1></div>
+                    <div class="col-sm-8"><h1><b>Available</b> Exams</h1></div>
                     <div class="col-sm-4">
                         <div class="search-box">
                             <i class="material-icons">&#xE8B6;</i>
@@ -70,12 +64,12 @@
                         <th>Exam Title</th>
                         <th>Course Name</th>
                         <th>Total_Question</th>
-                        <th>Total_Student<i class="fa fa-sort"></i></th>
-                        <th>Student_Pass</th>
+                        <th>startDate<i class="fa fa-sort"></i></th>
+                        <th>Exam Duration</th>
                         <th>Status</th>
-                        <th>Actions</th>
                 </thead>
                 <tbody>
+                <?php $i =0; ?>
                     <?php
                      foreach ($res as $row) {
                     ?>
@@ -85,15 +79,9 @@
                         <td><?php echo $row['title'];?></td>
                         <td><?php echo $row['cname'];?></td>
                         <td><?php echo $row['question_num'];?></td>
-                        <td><?php echo $row['numOfStudent']?></td>
-                        <td><?php echo $row['student_pass'];?></td>
-                        <td class="<?php echo $row['status']?>"><?php echo $row['status'];?></td>
-                        <td><!--url  ../../../functions -->
-                            <a href="<?php echo $row['id'];?>" style="color:#03A9F4" class="viewE" title="View" data-toggle="tooltip"><i class="fas fa-eye"></i></a>
-                            <a id="<?php echo $row['id'];?>" style="color:#FFC107" class="editE" title="Edit" data-toggle="tooltip"><i class="fas fa-edit"></i></a>
-                            <a id="<?php echo $row['id'];?>" picture="" style="color:#E34724" class="deleteE" title="Delete" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
-                        </tr>
-                        
+                        <td class="s" duration="<?php $workingHours = (strtotime($row['endTime']) - strtotime($row['startDate'])) / 3600;echo $workingHours." Hours";?>" exam="<?php echo $row['id'];?>"><?php echo $row['startDate']?></td>
+                        <td><?php $workingHours = (strtotime($row['endTime']) - strtotime($row['startDate'])) / 3600;echo $workingHours." Hours";?></td>
+                        <td class="enroll<?php echo $i++;?>" exam="<?php echo $row['id'];?>" style="border:1px solid gray;border:radius:50%;background-color:black">-----</td>
                 <?php
                 }
                 ?>
@@ -113,9 +101,9 @@
             </div>
         </div>
     </div>  
-</div> 
+</div>
 <script src="../../../Scripts/jquery-3.6.0.min.js"></script>
-<script src="../js/examAjax.js"></script>
+<script src="../js/checkTime.js"></script>
 <script src="../../../Scripts/bootstrap.min.js"></script>
 <script src="../../../Scripts/all.min.js"></script>
 <script src="../../../Scripts/sweetalert.js"></script>

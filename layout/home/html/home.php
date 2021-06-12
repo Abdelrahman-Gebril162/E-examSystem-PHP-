@@ -22,7 +22,7 @@
                     <li><a href="#contact">Contact us </a></li>
                     <?php if(isset($_SESSION['loginSession']['login']) == true) { ?>
                     <?php if($_SESSION['loginSession']['role_id'] == 2) { ?>
-                    <li><a href="/E-examSystem/docs/exam%20file/html/exam%20copy.html">Exams </a></li>
+                    <li><a href="/E-examSystem/layout/exam/html/availableE.php">Exams </a></li>
                     <?php } ?>
                     <?php } ?>
                     <?php if(isset($_SESSION['loginSession']['login']) == true) { ?>
@@ -45,6 +45,8 @@
                                 <a class="dropdown-item" href="/E-examSystem/layout/studentCourseEn/html/stable.php">Enrolement</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/E-examSystem/layout/question/html/stable.php">Question_bank</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/E-examSystem/layout/exam/html/stable.php">Examination</a>
                             </div>
                         </li>
                     <?php } ?>
@@ -83,9 +85,9 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-user-circle" style="width: 30px;height:30px"></i>
             </button>
-            <?php if(isset($_SESSION['loginSession']['login']) == true){include ("layout/login/html/loggedin.html");}
+            <?php if(isset($_SESSION['loginSession']['login']) == true){include ("layout/login/html/loggedin.php");}
             else {
-                include ("layout/login/html/logout.html");
+                include ("layout/login/html/logout.php");
             }?>
             </div>
         </div>

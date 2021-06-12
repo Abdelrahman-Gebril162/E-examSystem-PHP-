@@ -31,7 +31,7 @@ else
     $allsut2 = $AllStudentInExamCourse->setFetchMode(PDO::FETCH_ASSOC);
     $students2 = $AllStudentInExamCourse->fetchAll();
     $coun = count($students2);
-    $insExam = $conn->query("INSERT INTO `exam` (`id`, `title`, `created_at`, `question_num`, `num_hard_question`, `num_medium_question`, `num_easy_question`, `startDate`, `endTime`, `numOfStudent`, `student_pass`, `status`, `type`, `need_revision`, `course_id`, `prof_id`) VALUES (NULL, '$examName', CURRENT_TIMESTAMP(), '$totalQuestionNum', '$totalHardQ', '$totalMediumQ', '$totalEasyQ', '$startDate', '$endd', '$coun', '0', 'pending', '$et', 'NO', '$c', '$pn')");
+    $insExam = $conn->query("INSERT INTO `exam` (`id`, `title`, `created_at`, `question_num`, `num_hard_question`, `num_medium_question`, `num_easy_question`, `startDate`, `endTime`, `numOfStudent`, `student_pass`, `status`, `type`, `need_revision`, `course_id`, `prof_id`) VALUES (NULL, '$examName', CURRENT_TIMESTAMP(), '$totalQuestionNum', '$totalHardQ', '$totalMediumQ', '$totalEasyQ', '$startDate', '$endd', '$coun', '0', 'created', '$et', 'NO', '$c', '$pn')");
     if($insExam)
 	{
         $lastExam = $conn->lastInsertId();
