@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2021 at 07:58 PM
+-- Generation Time: Jun 13, 2021 at 03:53 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -38,6 +38,15 @@ CREATE TABLE `course` (
   `prof_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`id`, `name`, `description`, `credit_hours`, `level`, `chaptersNum`, `faculty_id`, `prof_id`) VALUES
+(8, 'ss', 'ss', 6, 2, 5, 6, 8),
+(17, 'h', 'In this department  you can learn how to design and build software', 2, 2, 2, 6, 21),
+(18, 'hopa', 'hhhhhh', 2, 2, 2, 6, 22);
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +58,16 @@ CREATE TABLE `course_chapter` (
   `title` varchar(50) DEFAULT NULL,
   `course_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `course_chapter`
+--
+
+INSERT INTO `course_chapter` (`id (pk)`, `title`, `course_id`) VALUES
+(17, 'sssss', 8),
+(18, 'ggg', 8),
+(21, 'hello', 18),
+(22, 'saw', 17);
 
 -- --------------------------------------------------------
 
@@ -68,7 +87,9 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`id`, `name`, `description`, `faculty_id`) VALUES
-(1, 'masterDep', 'master department needed for university', 1);
+(1, 'masterDep', 'master department needed for university', 1),
+(4, 'it', 'ttttttttttttt', 6),
+(5, 'nour', 'vision', 6);
 
 -- --------------------------------------------------------
 
@@ -85,6 +106,7 @@ CREATE TABLE `exam` (
   `num_medium_question` int(11) DEFAULT NULL,
   `num_easy_question` int(11) DEFAULT NULL,
   `startDate` datetime DEFAULT NULL,
+  `endTime` datetime DEFAULT NULL,
   `numOfStudent` int(11) DEFAULT NULL,
   `student_pass` int(11) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
@@ -93,6 +115,16 @@ CREATE TABLE `exam` (
   `course_id` int(11) DEFAULT NULL,
   `prof_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `exam`
+--
+
+INSERT INTO `exam` (`id`, `title`, `created_at`, `question_num`, `num_hard_question`, `num_medium_question`, `num_easy_question`, `startDate`, `endTime`, `numOfStudent`, `student_pass`, `status`, `type`, `need_revision`, `course_id`, `prof_id`) VALUES
+(73, 'se', '2021-06-13 01:10:33', 2, 0, 1, 1, '2021-06-13 01:10:00', '2021-06-13 01:22:00', 1, 0, 'complete', 'finall', 0, 8, 8),
+(76, 'hopa', '2021-06-13 02:09:41', 1, 0, 0, 1, '2021-06-13 02:09:00', '2021-06-13 02:21:00', 1, 0, 'created', 'finall', 0, 18, 22),
+(79, 'saw', '2021-06-13 02:27:58', 1, 0, 0, 1, '2021-06-13 02:27:00', '2021-06-13 02:39:00', 1, 0, 'complete', 'finall', 0, 17, 21),
+(80, 'TEST', '2021-06-13 03:22:53', 2, 0, 1, 1, '2021-06-13 03:22:00', '2021-06-13 03:34:00', 1, 0, 'complete', 'finall', 0, 8, 8);
 
 -- --------------------------------------------------------
 
@@ -105,6 +137,17 @@ CREATE TABLE `exam_question` (
   `exam_id` int(11) DEFAULT NULL,
   `question_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `exam_question`
+--
+
+INSERT INTO `exam_question` (`id (pk)`, `exam_id`, `question_id`) VALUES
+(11196, 73, 16),
+(11197, 73, 17),
+(11201, 79, 20),
+(11202, 80, 16),
+(11203, 80, 17);
 
 -- --------------------------------------------------------
 
@@ -128,7 +171,8 @@ CREATE TABLE `faculty` (
 --
 
 INSERT INTO `faculty` (`id`, `name`, `description`, `createdAt`, `logo`, `background`, `levelsNum`, `specialYear`) VALUES
-(1, 'university', 'online university is created to serve student and professor all around the world', '2021-05-24', NULL, NULL, 0, 0);
+(1, 'university', 'online university is created to serve student and professor all around the world', '2021-05-24', '../../../upload/profImages/1102782386.png', '../../../upload/profImages/1102782386.png', 0, 0),
+(6, 'computer', 'vision', '2021-06-03', '../../../upload/facultyImages/440510316.png', '../../../upload/facultyImages/440510316.png', 4, 3);
 
 -- --------------------------------------------------------
 
@@ -157,7 +201,9 @@ CREATE TABLE `professor` (
 --
 
 INSERT INTO `professor` (`id`, `N_id`, `fname`, `lname`, `gender`, `birthdate`, `mobileN`, `country`, `city`, `picture`, `faculty_id`, `account_id`, `dept_id`) VALUES
-(8, 11111111111111, 'master', 'admin', 'male', '2000-06-01', '01277613449', 'egypt', 'alex', NULL, 1, NULL, 1);
+(8, 11111111111111, 'master', 'admin', 'male', '2000-06-01', '01277613449', 'egypt', 'alex', '../../../upload/profImages/871156435.png', 1, 13, 1),
+(21, 30006010206238, 'abdelrahman', 'gebril', 'male', '2000-06-01', '01277613442', 'egypt', 'alex', '../../../upload/profImages/B612_20170704_180040.jpg', 6, 62, 4),
+(22, 30006000006238, 'Amr', 'AboHany', 'male', '1988-01-05', '01277613441', 'egypt', 'alex', '../../../upload/profImages/871156435.png', 6, 63, 4);
 
 -- --------------------------------------------------------
 
@@ -168,6 +214,7 @@ INSERT INTO `professor` (`id`, `N_id`, `fname`, `lname`, `gender`, `birthdate`, 
 CREATE TABLE `question_bank` (
   `id` int(11) NOT NULL,
   `header` text DEFAULT NULL,
+  `va` text DEFAULT NULL,
   `answerA` varchar(50) DEFAULT NULL,
   `answerB` varchar(50) DEFAULT NULL,
   `answerC` varchar(50) DEFAULT NULL,
@@ -175,10 +222,21 @@ CREATE TABLE `question_bank` (
   `correctAnswer` varchar(50) DEFAULT NULL,
   `question_mark` int(11) DEFAULT NULL,
   `difficulty` varchar(50) DEFAULT NULL,
-  `type_id` varchar(50) DEFAULT NULL,
+  `question_type` varchar(50) DEFAULT NULL,
+  `header_type` varchar(50) DEFAULT NULL,
   `course_id` int(11) DEFAULT NULL,
   `chapter_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `question_bank`
+--
+
+INSERT INTO `question_bank` (`id`, `header`, `va`, `answerA`, `answerB`, `answerC`, `answerD`, `correctAnswer`, `question_mark`, `difficulty`, `question_type`, `header_type`, `course_id`, `chapter_id`) VALUES
+(16, 'هل المغني حسن شاكوش ', '../../../upload/questionBank/vaSource/yt1s.com - Amr Diab  Wana Maak عمرو دياب  وأنا معاك.mp3', 'True', 'False', '', '', '2', 1, '1', 'tf', 'a', 8, 17),
+(17, 'whatch this video', '../../../upload/questionBank/vaSource/٢٠١٨١٠٠٩_٠٠٠٧٠٢.mp4', '1', '2', 'a', 'b', '1', 2, '2', 'mcq', 'v', 8, 18),
+(19, '1+1', NULL, 'True', 'False', '', '', '1', 1, '1', 'tf', 'snt', 18, 21),
+(20, '1+1=1', NULL, 'True', 'False', '', '', '1', 1, '1', 'tf', 'snt', 17, 22);
 
 -- --------------------------------------------------------
 
@@ -228,7 +286,8 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `N_id`, `fname`, `lname`, `gender`, `birthdate`, `mobileN`, `country`, `city`, `picture`, `level`, `faculty_id`, `account_id`, `dept_id`) VALUES
-(1, 1, 'master', 'student', 'male', '2000-06-01', '01277613449', 'egypt', 'alex', NULL, 1, 1, NULL, 1);
+(1, 1, 'master', 'student', 'male', '2000-06-01', '01277613449', 'egypt', 'alex', NULL, 1, 1, NULL, NULL),
+(100, 12345678942544, 'amira', 'rr', 'male', '2021-06-24', '01244152366', 'e', 'rr', '../../../upload/studentImages/1836995109.jpg', 2, 6, 61, 4);
 
 -- --------------------------------------------------------
 
@@ -242,6 +301,14 @@ CREATE TABLE `student_course_enroll` (
   `course_id` int(11) DEFAULT NULL,
   `grade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_course_enroll`
+--
+
+INSERT INTO `student_course_enroll` (`id`, `student_id`, `course_id`, `grade`) VALUES
+(7, 100, 8, 1),
+(8, 100, 17, 1);
 
 -- --------------------------------------------------------
 
@@ -258,6 +325,15 @@ CREATE TABLE `student_exam_answer` (
   `mark` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `student_exam_answer`
+--
+
+INSERT INTO `student_exam_answer` (`id`, `student_id`, `exam_id`, `question_id`, `student_answer`, `mark`) VALUES
+(151, 100, 79, 20, 'True', 1),
+(153, 100, 80, 16, 'False', 1),
+(154, 100, 80, 17, '2', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -271,6 +347,15 @@ CREATE TABLE `studen_exam_enroll` (
   `totalScore` int(11) DEFAULT NULL,
   `attendance_status` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `studen_exam_enroll`
+--
+
+INSERT INTO `studen_exam_enroll` (`id`, `student_id`, `exam_id`, `totalScore`, `attendance_status`) VALUES
+(42, 100, 73, 0, 1),
+(43, 100, 79, 1, 1),
+(44, 100, 80, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -292,7 +377,10 @@ CREATE TABLE `user_account` (
 --
 
 INSERT INTO `user_account` (`id`, `email`, `password`, `created_at`, `student_id`, `professor_id`) VALUES
-(13, 'admin@gmail.com', '111111', '2021-05-24 19:57:44', 1, 8);
+(13, 'admin@gmail.com', '111111', '2021-05-24 19:57:44', 1, 8),
+(61, 'a@gmail.com', '123456', '2021-06-04 01:54:53', 100, 8),
+(62, 'abdo@gmail.com', '111111', '2021-06-04 11:49:47', 1, 21),
+(63, 'amr@gmail.com', '111111', '2021-06-04 11:53:32', 1, 22);
 
 -- --------------------------------------------------------
 
@@ -305,6 +393,17 @@ CREATE TABLE `user_role` (
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_role`
+--
+
+INSERT INTO `user_role` (`id`, `user_id`, `role_id`) VALUES
+(48, 61, 2),
+(49, 13, 1),
+(50, 13, 3),
+(51, 62, 3),
+(52, 63, 3);
 
 --
 -- Indexes for dumped tables
@@ -440,49 +539,49 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `course_chapter`
 --
 ALTER TABLE `course_chapter`
-  MODIFY `id (pk)` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id (pk)` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `exam_question`
 --
 ALTER TABLE `exam_question`
-  MODIFY `id (pk)` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id (pk)` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11204;
 
 --
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `professor`
 --
 ALTER TABLE `professor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `question_bank`
 --
 ALTER TABLE `question_bank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -494,37 +593,37 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `student_course_enroll`
 --
 ALTER TABLE `student_course_enroll`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `student_exam_answer`
 --
 ALTER TABLE `student_exam_answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `studen_exam_enroll`
 --
 ALTER TABLE `studen_exam_enroll`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Constraints for dumped tables
