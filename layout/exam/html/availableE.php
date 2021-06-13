@@ -1,4 +1,5 @@
 <?php include "../../../functions/exam/selectAllExam.php";?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,6 +74,8 @@
                     <?php
                      foreach ($res as $row) {
                     ?>
+                    <?php foreach ($_SESSION['courses'] as $c=>$cid) { ?>
+                        <?php if($cid==$row['cid']) { ?>
                         <tr>
                         <td><?php echo $row['id'];?></td>
                         <td><?php echo $row['ffname'];?></td>
@@ -82,9 +85,9 @@
                         <td class="s" duration="<?php $workingHours = (strtotime($row['endTime']) - strtotime($row['startDate'])) / 3600;echo $workingHours." Hours";?>" exam="<?php echo $row['id'];?>"><?php echo $row['startDate']?></td>
                         <td><?php $workingHours = (strtotime($row['endTime']) - strtotime($row['startDate'])) / 3600;echo $workingHours." Hours";?></td>
                         <td class="enroll<?php echo $i++;?>" exam="<?php echo $row['id'];?>" style="border:1px solid gray;border:radius:50%;background-color:black">-----</td>
-                <?php
-                }
-                ?>
+                        <?php } ?>
+                        <?php } ?>
+                <?php } ?>
                 </tbody>
             </table>
             <div class="clearfix">

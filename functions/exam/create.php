@@ -22,9 +22,9 @@ else
     $totalChapters=0;
     for ($i=4; $i <count($myPost)-2 ; $i+=5) { 
         $totalQuestionNum = $totalQuestionNum + (int)$myPost[$i];
-        if($myPost[$i+3]=="1"){$totalEasyQ+=$myPost[$i+3];}
-        elseif ($myPost[$i+3]=="2") {$totalMediumQ+=$myPost[$i+3];}
-        elseif ($myPost[$i+3]=="3") {$totalHardQ+=$myPost[$i+3];}
+        if($myPost[$i+3]=="1"){$totalEasyQ+=$myPost[$i];}
+        if ($myPost[$i+3]=="2") {$totalMediumQ+=$myPost[$i];}
+        if ($myPost[$i+3]=="3") {$totalHardQ+=$myPost[$i];}
         $totalChapters++;
     }
     $AllStudentInExamCourse = $conn->query("SELECT count(*) FROM student_course_enroll WHERE course_id='$c' ");
@@ -45,7 +45,7 @@ else
             if($myPost[$i+3]=="1")
             {
                 
-                for ($i=0; $i<$lim ; $i++) {
+                for ($s=0; $s<$lim ; $s++) {
                     $ques = $conn->query("SELECT id from `question_bank` where difficulty='1' and header_type='$htt' and question_type='$qtt' and chapter_id='$ch' and course_id='$c' order by rand() limit 1");
                     $ques1 = $ques->setFetchMode(PDO::FETCH_ASSOC);
                     $ques2 = $ques->fetchAll();
@@ -55,11 +55,25 @@ else
             }
             elseif($myPost[$i+3]=="2")
             {
-                $insQuestion = $conn->query("INSERT INTO `exam_question` (`id (pk)`, `exam_id`, `question_id`) VALUES (NULL, '$lastExam', SELECT id from question_bank where difficulty='2' and header_type='$htt' and question_type='$qtt' and chapter_id='$ch' and course_id='$c' order by rand() limit '$lim')");
+                for ($s=0; $s<$lim ; $s++) {
+                    $ques = $conn->query("SELECT id from `question_bank` where difficulty='2' and header_type='$htt' and question_type='$qtt' and chapter_id='$ch' and course_id='$c' order by rand() limit 1");
+                    $ques1 = $ques->setFetchMode(PDO::FETCH_ASSOC);
+                    $ques2 = $ques->fetchAll();
+                    $ques3=$ques2[0]['id'];
+                    $insQuestion = $conn->query("INSERT INTO `exam_question` (`id (pk)`, `exam_id`, `question_id`) VALUES (NULL, '$lastExam','$ques3' )");
+                }
+                //$insQuestion = $conn->query("INSERT INTO `exam_question` (`id (pk)`, `exam_id`, `question_id`) VALUES (NULL, '$lastExam', SELECT id from question_bank where difficulty='2' and header_type='$htt' and question_type='$qtt' and chapter_id='$ch' and course_id='$c' order by rand() limit '$lim')");
             }
             elseif($myPost[$i+3]=="3")
             {
-                $insQuestion = $conn->query("INSERT INTO `exam_question` (`id (pk)`, `exam_id`, `question_id`) VALUES (NULL, '$lastExam', SELECT id from question_bank where difficulty='3' and header_type='$htt' and question_type='$qtt' and chapter_id='$ch' and course_id='$c' order by rand() limit '$lim' )");
+                for ($s=0; $s<$lim ; $s++) {
+                    $ques = $conn->query("SELECT id from `question_bank` where difficulty='3' and header_type='$htt' and question_type='$qtt' and chapter_id='$ch' and course_id='$c' order by rand() limit 1");
+                    $ques1 = $ques->setFetchMode(PDO::FETCH_ASSOC);
+                    $ques2 = $ques->fetchAll();
+                    $ques3=$ques2[0]['id'];
+                    $insQuestion = $conn->query("INSERT INTO `exam_question` (`id (pk)`, `exam_id`, `question_id`) VALUES (NULL, '$lastExam','$ques3' )");
+                }
+                //$insQuestion = $conn->query("INSERT INTO `exam_question` (`id (pk)`, `exam_id`, `question_id`) VALUES (NULL, '$lastExam', SELECT id from question_bank where difficulty='3' and header_type='$htt' and question_type='$qtt' and chapter_id='$ch' and course_id='$c' order by rand() limit '$lim' )");
             }
         }
         if($insQuestion)

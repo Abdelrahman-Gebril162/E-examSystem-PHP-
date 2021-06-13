@@ -2,7 +2,7 @@
 include "../../../functions/mainFunctions/conn.php" ;
 //include "functions/mainFunctions/conn.php" ;
 /*if ($_SERVER['REQUEST_METHOD'] === 'POST') {*/
-$stmt = $conn->query("SELECT e.*, c.name as cname, f.name as ffname from exam as e 
+$stmt = $conn->query("SELECT e.*, c.name as cname,c.id as cid,f.name as ffname from exam as e 
                     inner join professor as p 
                     on e.prof_id = p.id 
                     inner join faculty as f 

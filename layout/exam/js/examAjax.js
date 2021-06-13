@@ -67,7 +67,7 @@ $(document).on('change','.c',function(){
                 $('.pn').text("No professor");
             }
             else{
-                $('.pn').val(response[0].id);
+                $('.pn').val(response[0][0]);
             }
         }
     });
@@ -249,14 +249,14 @@ $(document).ready(function(){
                     else if(element.question_type=="mcq"){hasmcq=true;}
                     if(element.header_type=='a'){hasa=true;}
                     else if(element.header_type=="v"){hasv=true;}
-                    else if(element.header_type=="sen"){hassen=true;}
+                    else if(element.header_type=="snt"){hassen=true;}
                     if(element.difficulty=="1"){iseasy=true;}
                     else if(element.difficulty=="2"){ismedium=true;}
                     else if(element.difficulty=="3"){ishard=true;}
                 });
                 let mcq = "<option value='mcq'> MCQ </option>";
                 let tf = "<option value='tf'>True&False</option>";
-                let sen = "<option value='sen'>Just-Sentence</option>";
+                let sen = "<option value='snt'>Just-Sentence</option>";
                 let vid = "<option value='v'>Video</option>";
                 let aud = "<option value='a'>Audio</option>";
                 let easy = "<option value='1'>Easy</option>";
@@ -295,14 +295,14 @@ $(document).on("change",".cha:last",function(event){
                     else if(element.question_type=="mcq"){hasmcq=true;}
                     if(element.header_type=='a'){hasa=true;}
                     else if(element.header_type=="v"){hasv=true;}
-                    else if(element.header_type=="sen"){hassen=true;}
+                    else if(element.header_type=="snt"){hassen=true;}
                     if(element.difficulty=="1"){iseasy=true;}
                     else if(element.difficulty=="2"){ismedium=true;}
                     else if(element.difficulty=="3"){ishard=true;}
                 });
                 let mcq = "<option value='mcq'> MCQ </option>";
                 let tf = "<option value='tf'>True&False</option>";
-                let sen = "<option value='sen'>Just-Sentence</option>";
+                let sen = "<option value='snt'>Just-Sentence</option>";
                 let vid = "<option value='v'>Video</option>";
                 let aud = "<option value='a'>Audio</option>";
                 let easy = "<option value='1'>Easy</option>";

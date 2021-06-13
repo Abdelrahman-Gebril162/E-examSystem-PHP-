@@ -1143,7 +1143,7 @@ return false;})
         //#region getCourse
         $(document).ready(function(){
             $.ajax({
-                url: '../../../functions/chapters/getCourse.php',
+                url: '../../../functions/chapter/getCourse.php',
                 type: 'post',
                 dataType: 'json',
                 success: function(response){
@@ -1173,7 +1173,7 @@ return false;})
             var formData = new FormData(this);
             
             $.ajax({
-                url: "../../../functions/chapters/create.php",
+                url: "../../../functions/chapter/create.php",
                 type: 'POST',
                 data: formData,
                 success: callbackChapter,
@@ -1198,7 +1198,7 @@ return false;})
                               location.reload();
                             }
                             else{
-                                window.location.href="../../../layout/chapters/html/stable.php";
+                                window.location.href="../../../layout/chapter/html/stable.php";
                             }
                           });
                     }
@@ -1238,7 +1238,7 @@ return false;})
                     e.preventDefault();
                     $.ajax({
                      type : "post",
-                     url : "../../../functions/chapters/delete.php",
+                     url : "../../../functions/chapter/delete.php",
                      dataType : "json",  
                      data : {id:$(this).attr('id')},
                      cache : false,
@@ -1279,7 +1279,7 @@ return false;})
                 if (result.value) {
                     $.ajax({
                      type : "post",
-                     url : "../../../functions/chapters/update.php",
+                     url : "../../../functions/chapter/update.php",
                      dataType : "json",
                      data : {id:$(this).attr('id'),title:$('#title').val()},
                      cache : false,
@@ -1309,7 +1309,7 @@ return false;})
             e.preventDefault();
             $.ajax({
             type : "post",
-            url : "../../../functions/chapters/selectSingle.php",
+            url : "../../../functions/chapter/selectSingle.php",
             dataType : "json",  
             data : {id: $(this).attr('href')},
             cache : false,

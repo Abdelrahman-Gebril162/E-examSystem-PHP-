@@ -59,7 +59,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/E-examSystem/layout/chapters/html/stable.php">Chapters</a>
+                                <a class="dropdown-item" href="/E-examSystem/layout/chapter/html/stable.php">Chapters</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Exam</a>
                                 </div>
@@ -68,15 +68,7 @@
                                 <?php } ?>
                                 <?php if(isset($_SESSION['loginSession']['login']) == true) { ?>
                                 <?php if($_SESSION['loginSession']['role_id'] == 2) { ?>
-                                    <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Student Adminstration ▼
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/E-examSystem/layout/studentCourseEn/html/stable.php">Enrolement</a>
-                                </div>
-                                </li>
+                                    <!--put what student should see-->
                                 <?php } ?>
                                 <?php } ?>
                 </ul>

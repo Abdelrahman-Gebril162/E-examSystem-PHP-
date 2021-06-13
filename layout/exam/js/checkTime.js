@@ -73,18 +73,3 @@ $(document).on("click","#pending",function(){
 
 //#region exam submition
 
-
-
-
-//#endregion
-
-
-
-
-
-
-
-
-
-//#region exam submition
-

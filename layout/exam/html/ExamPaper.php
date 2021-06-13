@@ -83,6 +83,7 @@
     <div class="tar"></div>
 </form>
     <script src="../js/jquery-3.5.1.js"></script>
+    <script src="../js/examPaper.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
         function preventBack(){window.history.forward();}
@@ -100,15 +101,7 @@ $(document).ready(function(){
         console.log(end);
         if(Date.now()>=end){
             clearInterval();
-            $( "#examPaper" ).submit(function(e){e.preventDefault();});
-            alert("finished");
-            window.location.href="/E-examSystem/layout/exam/html/availableE.php";
-        }
-});
-};
-$(document).on("submit","#examPaper",function(){
-                clearInterval();
-                alert();
+            $( "#examPaper" ).submit(function(e){
                 $.ajax({
                 type : "post",
                 url : "../../../functions/exam/submitExam.php",
@@ -116,9 +109,14 @@ $(document).on("submit","#examPaper",function(){
                 data : $(this).serialize(),
                 cache : false,
                 success:function(){
+                    window.location.href="/E-examSystem/layout/exam/html/availableE.php";
                 }
             });
-        });
+            alert("finished");
+            });
+        }
+});
+};
 </script>
 </body>
 </html>

@@ -38,7 +38,7 @@
             <div class="row" style="margin:0;padding:0">
                     <div class="col-sm-8"></div>
                     <div class="col-sm-4">
-                    <a href="../../../layout/chapters/html/create.php" id='add' class="btn btn-success" style="float:right;"><i class="fas fa-plus"></i> ADD</a>
+                    <a href="../../../layout/chapter/html/create.php" id='add' class="btn btn-success" style="float:right;"><i class="fas fa-plus"></i> ADD</a>
                     </div>
                 </div>
                 <div class="row" style="margin:0;padding:0">

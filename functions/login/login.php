@@ -34,6 +34,7 @@ if($ress[0]['role_id']=="1" || $ress[0]['role_id']=="3"){
         }
 }
 else if($ress[0]['role_id']=="2"){
+    
     $seluser = $conn->query("SELECT * FROM student WHERE account_id='$userId'");
     $student = $seluser->fetchAll();
     $_SESSION['loginSession'] = array(
@@ -55,6 +56,17 @@ else if($ress[0]['role_id']=="2"){
         {
         $res = array("res" => "invalid");
         }
+    if($_SESSION['loginSession']['role_id']==2)
+    {
+        $member= $userId = $_SESSION['loginSession']['member_id'];
+        $d = $conn->query("SELECT * FROM student_course_enroll WHERE student_id='$member'");
+        $s = $d->fetchAll();
+        $_SESSION['courses']=array();
+        foreach($s as $g){
+            array_push($_SESSION['courses'],$g['course_id']);
+        }
+    }
+    
 }
 echo json_encode($res);
 ?>
