@@ -1143,7 +1143,7 @@ return false;})
         //#region getCourse
         $(document).ready(function(){
             $.ajax({
-                url: '../../../functions/chapter/getCourse.php',
+                url: '../../../functions/chapters/getCourse.php',
                 type: 'post',
                 dataType: 'json',
                 success: function(response){
@@ -1173,7 +1173,7 @@ return false;})
             var formData = new FormData(this);
             
             $.ajax({
-                url: "../../../functions/chapter/create.php",
+                url: "../../../functions/chapters/create.php",
                 type: 'POST',
                 data: formData,
                 success: callbackChapter,
@@ -1238,7 +1238,7 @@ return false;})
                     e.preventDefault();
                     $.ajax({
                      type : "post",
-                     url : "../../../functions/chapter/delete.php",
+                     url : "../../../functions/chapters/delete.php",
                      dataType : "json",  
                      data : {id:$(this).attr('id')},
                      cache : false,
@@ -1279,7 +1279,7 @@ return false;})
                 if (result.value) {
                     $.ajax({
                      type : "post",
-                     url : "../../../functions/chapter/update.php",
+                     url : "../../../functions/chapters/update.php",
                      dataType : "json",
                      data : {id:$(this).attr('id'),title:$('#title').val()},
                      cache : false,
@@ -1309,7 +1309,7 @@ return false;})
             e.preventDefault();
             $.ajax({
             type : "post",
-            url : "../../../functions/chapter/selectSingle.php",
+            url : "../../../functions/chapters/selectSingle.php",
             dataType : "json",  
             data : {id: $(this).attr('href')},
             cache : false,
@@ -1480,6 +1480,7 @@ return false;})
                      data : {id:$(this).attr('id')},
                      cache : false,
                      success : function(d){
+                         alert(d.res);
                        if(d.res == "success")
                        {
                          Swal.fire(

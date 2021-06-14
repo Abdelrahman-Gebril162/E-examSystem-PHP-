@@ -5,7 +5,7 @@
     <meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>E-Learning University</title>
-
+    <script>var counter = 2;</script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
     <!-- Google fonts-->
@@ -165,24 +165,23 @@ function maxQNum(){
     console.log(tot);
 }
         function repeat(num){
-        var chnum = $('#ch'+num[1]).val();
+        /*var chnum = $('#ch'+num[1]).val();
         var self = document.getElementById(num);
-        var div= $('#ch'+num[1]).first();
+        var div= $('#ch'+num[1]+':last').last();
+        div.after(div.clone());*/
+        var div= $('div#ch1:last');
         div.after(div.clone());
         findTotal();
         changeName();
-        
    }
     function changeName() {
-        $('div#ch1:last input#qnum').attr('name','qnum'+counter);
-        $('div#ch1:last .chapter').attr('name','chapter'+counter);
-        $('div#ch1:last .qt').attr('name','qt'+counter);
-        $('div#ch1:last .cqdiff1').attr('name','cqdiff'+counter);
-        $('div#ch1:last .ht').attr('name','ht'+counter);
+        $('div#ch1 input#qnum:last').attr('name','qnum'+counter);
+        $('div#ch1 .chapter:last').attr('name','chapter'+counter);
+        $('div#ch1 .qt:last').attr('name','qt'+counter);
+        $('div#ch1 .cqdiff1:last').attr('name','cqdiff'+counter);
+        $('div#ch1 .ht:last').attr('name','ht'+counter);
         counter++;
-        
     }
-    var counter = 2;
     function less() {
         $('div#ch1:last').remove();
         $('div#ch1:last').focus();

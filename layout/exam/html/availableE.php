@@ -71,8 +71,14 @@
                 </thead>
                 <tbody>
                 <?php $i =0; ?>
+                <?php if($_SESSION['courses'] == NULL) { ?>
+                <tr>
+                <td colspan="8"> NO Exam Created YEt</td>
+                </tr>
+                <?php } ?>
+                <?php if($_SESSION['courses'] != NULL) { ?>
                     <?php
-                     foreach ($res as $row) {
+                    foreach ($res as $row) {
                     ?>
                     <?php foreach ($_SESSION['courses'] as $c=>$cid) { ?>
                         <?php if($cid==$row['cid']) { ?>
@@ -85,8 +91,10 @@
                         <td class="s" duration="<?php $workingHours = (strtotime($row['endTime']) - strtotime($row['startDate'])) / 3600;echo $workingHours." Hours";?>" exam="<?php echo $row['id'];?>"><?php echo $row['startDate']?></td>
                         <td><?php $workingHours = (strtotime($row['endTime']) - strtotime($row['startDate'])) / 3600;echo $workingHours." Hours";?></td>
                         <td class="enroll<?php echo $i++;?>" exam="<?php echo $row['id'];?>" style="border:1px solid gray;border:radius:50%;background-color:black">-----</td>
+                        </tr>
                         <?php } ?>
                         <?php } ?>
+                <?php } ?>
                 <?php } ?>
                 </tbody>
             </table>

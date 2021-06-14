@@ -55,7 +55,7 @@
             </nav>
             <!-- Page content-->
             <div class="row">
-                <?php if($res != null) {$i=0;?>
+                <?php if($res != NULL) {$i=0;?>
                 <?php for($i=0;$i<count($res);$i++)
                  { 
                 ?>  

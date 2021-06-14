@@ -58,8 +58,8 @@
                         <th>Question</th>
                         <th>Video||audio</th>
                         <th>Correct Answer</th>
-                        <th>Course<i class="fa fa-sort"></i></th>
                         <th>Chapter</th>
+                        <th>Course<i class="fa fa-sort"></i></th>
                         <th>level</th>
                         <th>Actions</th>
                 </thead>

@@ -34,7 +34,7 @@
                     <li><a href="/E-examSystem/layout/exam/html/AvailableE.php">Exam</a></li>
                   </ul>
             </li>
-            <li><img src="<?php echo $res[0]['picture'];?>" class="red" style="margin-top: 1px;"></li>
+            <li><img src="<?php if($res==NULL)echo $res3[0]['picture'];else{echo $res[0]['picture'];}?>" class="red" style="margin-top: 1px;"></li>
             <li>
 <i class="bi bi-person-plus">         
 <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="20" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
@@ -62,41 +62,41 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-2 " style="text-align: center;">
-            <img src="<?php echo $res[0]['picture'];?>" class="amira">
+            <img src="<?php if($res==NULL)echo $res3[0]['picture'];else{echo $res[0]['picture'];}?>" class="amira">
 
           <a> <figcaption class="figure-caption">edit photo</figcaption></a> 
 
     </div>
     <div class=" bor col-lg-5  ">
         <h2>
-            <?php echo $res[0]['fname']." ". $res[0]['lname']?>
+        <?php if($res==NULL){echo $res3[0]['fname']." ". $res3[0]['lname'];}else{echo $res[0]['fname']." ". $res[0]['lname'];}?>
         </h2>
         <br>
         <br>
         <p>
-            Faculty Name: <?php echo $res[0]['ffname']?>
+            Faculty Name: <?php if($res==NULL)echo $res3[0]['ffname'];else{echo $res[0]['ffname'];}?>
             </p>
             <p>
             <?php if($_SESSION['loginSession']['role_id']==1 ||$_SESSION['loginSession']['role_id']==3 ) { ?>
             Mobile <?php echo $res[0]['mobileN']?> 
             <?php } ?>
             <?php if($_SESSION['loginSession']['role_id']==2 ) { ?>
-            Level <?php echo $res[0]['level']?> 
+            Level <?php if($res==NULL)echo $res3[0]['level'];else{echo $res[0]['level'];}?>
             <?php } ?>
             </p>
             <p>
-                Department: <?php echo $res[0]['ddname']?>
+                Department: <?php if($res==NULL)echo $res3[0]['ddname'];else{echo $res[0]['ddname'];}?>
             </p>
             <p>
             <?php if($_SESSION['loginSession']['role_id']==1 ||$_SESSION['loginSession']['role_id']==3 ) { ?>
             National_id <?php echo $res[0]['N_id']?> 
             <?php } ?>
             <?php if($_SESSION['loginSession']['role_id']==2 ) { ?>
-            Total Result <?php $coursesTotal=0;$studenTotal=0; foreach($res as $u) {$studenTotal+=$u['grade'];foreach($res2 as $s) { if($s['name']==$u['name']){$coursesTotal+=$s['CSum'];}}} echo (($studenTotal*100)/$coursesTotal)." %"?>
+            Total Result <?php if($res!=NULL) {$coursesTotal=0;$studenTotal=0; foreach($res as $u) {$studenTotal+=$u['grade'];foreach($res2 as $s) { if($s['name']==$u['name']){$coursesTotal+=$s['CSum'];}}} echo (($studenTotal*100)/$coursesTotal)." %";}?>
             <?php } ?>
             </p>
             <p>
-                gmail : <?php echo $res[0]['email']?>
+                gmail : <?php if($res==NULL)echo $res3[0]['email'];else{echo $res[0]['email'];}?>
             </p>
 
 </div>
@@ -105,6 +105,7 @@
 </div>
 
 </div>
+<center style="font-size:30px;font-weight:bold;">Courses List</center>
 <?php if($_SESSION['loginSession']['role_id']==1 ||$_SESSION['loginSession']['role_id']==3 ) { ?>
 <div class="container">
     <div class="row" >
@@ -123,6 +124,7 @@
 <?php if($_SESSION['loginSession']['role_id']==2 ) { ?>
 <div class="container">
     <div class="row" >
+    <?php if($res!=NULL) { ?>
     <?php foreach($res as $u) {?>
     <div class="org col-lg-4" >
         <div class="column" style="height:100%">
@@ -132,11 +134,12 @@
             <?php foreach($res2 as $s) {?>
             <?php if($s['name']==$u['name']) { ?>
             <p><span style="color: white;font-size: 25px;">+</span> YOur Grade:  <?php echo $u['grade'];?> /<?php echo $s['CSum'];?> </p>
-            <?php if(($u['grade']*100)/$s['CSum']>=50){echo '<p><span style="color: white;font-size: 25px;">+</span> Result: <span style="color: green;font-size: 15px;font-weight:bold;">SUCCESS</span> </p>';}else{echo '<p><span style="color: white;font-size: 25px;">+</span> Result: <span style="color: RED;font-size: 15px;font-weight:bold;">FAILED</span> </p>';}?>
+            <?php if(($u['grade']*100)/$s['CSum']>=50){echo '<p><span style="color: white;font-size: 25px;">+</span> Result: <span style="color: green;font-size: 15px;font-weight:bold;">SUCCESS</span> </p>';}elseif($u['grade']==NUll){echo '<p><span style="color: white;font-size: 25px;">+</span> Result: <span style="color: blue;font-size: 15px;font-weight:bold;">Take Exam First</span> </p>';}else{echo '<p><span style="color: white;font-size: 25px;">+</span> Result: <span style="color: RED;font-size: 15px;font-weight:bold;">FAILED</span> </p>';}?>
             <?php } ?>
             <?php } ?>
         </div>
     </div>
+    <?php } ?>
     <?php } ?>
     </div>
 </div>
